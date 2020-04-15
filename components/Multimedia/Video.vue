@@ -1,28 +1,45 @@
 <template>
-  <div class="container">
+  <div class="container-fluid px-0">
     <transition name="fade">
-    <video @ended="dispatchTransition('evet')" width="100%" height="100%">
-      <source :src="data.pathVideo" type="video/mp4">
-    </video>
+        <video
+          v-if="isEnabled"
+          muted
+          autoplay
+          @ended="dispatchTransition('evet')" 
+          width="100%" height="100%">
+        </video>
     </transition>
     <transition name="fade">
       <div class="wrapImage" v-if="!isEnabled">
-        <img :src="data.pathImage" width="100%" height="100%" alt="">
+        <img :src="require('~/'+pathImage)" width="100%" height="100%" alt="">
       </div>
     </transition>
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   data () {
     return {
-      isEnabled: true,
+      isEnabled: true
     }
   },
   props: {
-    data: Object
+    pathVideo: String,
+    pathImage: String
   },
-  mounted () {
+  created () {
+    axios({
+      url: `/_nuxt/${this.pathVideo}`,
+      method: 'GET',
+      responseType: 'blob',
+    }).then((response) => {
+      if (response.status === 200) {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        let video = document.querySelector('video');
+        video.src = url
+      }
+    })
   },
   methods: {
     dispatchTransition (v) {
