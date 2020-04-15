@@ -41,7 +41,7 @@
       display: inline-block;
       width: 185px;
       color: #fff;
-      background-color: #f36f21;
+      background-color: $orange-default;
     }
   }
 </style>
