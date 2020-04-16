@@ -15,7 +15,7 @@
 <script>
   export  default {
      name: 'Home',
-
+     layout: 'default-with-header-footer',
      data() {
       return {
 

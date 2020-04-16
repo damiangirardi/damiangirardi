@@ -19,7 +19,7 @@ export function	createRouter() {
 			},
 			{
 				path: '/masterplan'
-				name: 'masterplan'
+				name: 'Masterplan'
 				component: Masterplan
 			}
 		]
