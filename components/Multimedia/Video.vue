@@ -1,6 +1,10 @@
 <template>
   <div id="wrapVideo">
-    <video muted ref="myvideo" autoplay></video>
+    <div class="loading" :class="{'active': !videoLoaded }">
+      <img src="~assets/images/logo_green_park.png" width="160px" alt="green park logo" class="logo mb-4">
+      <b-spinner variant="success" label="Loading..."></b-spinner>
+    </div>
+    <video muted :src="pathVideo"></video>
     <div class="wrapImage" :class="{'active': isEnabled }">
       <img :src="require('~/'+pathImage)" width="100%" height="100%" alt />
     </div>
@@ -12,6 +16,7 @@ export default {
   data() {
     return {
       isEnabled: false,
+      videoLoaded: false,
       interval: null
     };
   },
@@ -19,36 +24,46 @@ export default {
     pathVideo: String,
     pathImage: String
   },
-  created() {
-    axios({
-      url: `/_nuxt/${this.pathVideo}`,
-      method: "GET",
-      responseType: "blob"
-    }).then(response => {
-      if (response.status === 200) {
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        let video = document.querySelector("video");
-        video.src = url;
-        video.addEventListener("loadedmetadata", () => {
-          this.interval = setInterval(() => {
-            let timeVideo = video.duration - video.currentTime;
-            if (timeVideo <= 0.5) {
-              this.isEnabled = true
-              clearInterval(this.interval);
-            }
-          }, 200);
-        });
-      }
+  mounted() {
+    let video = document.querySelector("video");
+    video.play()
+    video.addEventListener("loadedmetadata", () => {
+      this.interval = setInterval(() => {
+        if (video.currentTime > 0.5) {
+          this.videoLoaded = true
+        }
+        let timeVideo = video.duration - video.currentTime;
+        if (timeVideo <= 0.2) {
+          this.isEnabled = true
+          clearInterval(this.interval);
+        }
+      }, 200);
     });
   },
 };
 </script>
 <style lang="scss" scoped>
+.loading {
+    position: absolute;
+    z-index: 3;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    opacity: 0;
+    transition: opacity .5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  &.active {
+    opacity: 1;
+  }
+}
 #wrapVideo {
   position: relative;
   width: 100%;
   height: 100vh;
-  video {
+  video, .loading {
     width: 100%;
     height: 100vh;
     object-fit: cover;

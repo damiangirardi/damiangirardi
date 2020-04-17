@@ -1,17 +1,23 @@
 <template>
   <div id="home">
     <Video width='100%' height="100%" 
-      :pathVideo="videoInit.pathVideo"
+      :pathVideo="videoHome"
       :pathImage="videoInit.pathImage">> 
     </Video>
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 import Video from '~/components/Multimedia/Video'
   export  default {
     name: 'Test',
     components: {
       Video
+    },
+    computed: {
+        ...mapGetters({
+          videoHome: 'videos'
+        })
     },
     data() {
       return {

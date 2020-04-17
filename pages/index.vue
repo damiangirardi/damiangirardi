@@ -12,16 +12,19 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
   export  default {
      name: 'Home',
      layout: 'default-with-header-footer',
      data() {
       return {
       }
-     }
+     },
+    async created () {
+     this.$store.dispatch('getVideo', 'assets/videos/Cam_01.mp4')
+    }
   }
 </script>
-
 <style lang="scss" scoped>
   #home{
     .h-100{
