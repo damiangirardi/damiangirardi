@@ -2,7 +2,7 @@
 	<header>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-4">
 					<div class="menu" @click="toggleMenuOpen()" :class="{isOpen: isMenuOpen}">
 						<div class="lines">
 							<span></span>
@@ -12,10 +12,10 @@
 						<span>MENU</span>
 					</div>
 				</div>
-				<div class="col-md-4 text-center">
+				<div class="col-4 text-center">
 					<img src="~assets/images/logo_green_park.png" alt="green park logo" class="logo">
 				</div>
-				<div class="col-md-4 d-flex align-items-center justify-content-end">
+				<div class="col-4 d-flex align-items-center justify-content-end">
 					<div class="icon">
 						<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 								 viewBox="0 0 426.667 426.667" style="enable-background:new 0 0 426.667 426.667;" xml:space="preserve">
@@ -125,8 +125,8 @@
       }
     },
     watch: {
-    $route(to, from) {
-		if (this.isMenuOpen) {
+    	$route(to, from) {
+			if (this.isMenuOpen) {
 				this.toggleMenuOpen()
 			}
 		}
