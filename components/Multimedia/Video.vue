@@ -29,7 +29,7 @@ export default {
     video.play()
     video.addEventListener("loadedmetadata", () => {
       this.interval = setInterval(() => {
-        if (video.currentTime > 0.5) {
+        if (video.currentTime > 0.2) {
           this.videoLoaded = true
         }
         let timeVideo = video.duration - video.currentTime;
