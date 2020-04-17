@@ -13,13 +13,13 @@ export function	createRouter() {
 		mode: 'history',
 		routes: [
 			{
-				path: '/'
-				name: 'home'
+				path: '/',
+				name: 'home',
 				component: Home
 			},
 			{
-				path: '/masterplan'
-				name: 'Masterplan'
+				path: '/masterplan',
+				name: 'masterplan',
 				component: Masterplan
 			}
 		]

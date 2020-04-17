@@ -4,21 +4,19 @@
       <div class="container h-100">
         <div class="row justify-content-center align-items-end h-100">
           <div class="col-3 text-center">
-            <router-link :to="{name: 'masterplan'}" class="btn-orange mb-5">Explorar</router-link>
+            <router-link v-bind:to="'masterplan'" class="btn-orange mb-5">Explorar</router-link>
           </div>
         </div>
       </div>
     </section>
   </div>
 </template>
-
 <script>
   export  default {
      name: 'Home',
      layout: 'default-with-header-footer',
      data() {
       return {
-
       }
      }
   }
@@ -44,7 +42,7 @@
       display: inline-block;
       width: 185px;
       color: #fff;
-      background-color: #f36f21;
+      background-color: $orange-default;
     }
   }
 </style>
