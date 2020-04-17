@@ -4,7 +4,7 @@
       <img src="~assets/images/logo_green_park.png" width="160px" alt="green park logo" class="logo mb-4">
       <b-spinner variant="success" label="Loading..."></b-spinner>
     </div>
-    <video muted :src="pathVideo"></video>
+    <video muted src="~assets/videos/Cam_01.mp4"></video>
     <div class="wrapImage" :class="{'active': isEnabled }">
       <img :src="require('~/'+pathImage)" width="100%" height="100%" alt />
     </div>
