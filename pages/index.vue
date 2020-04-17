@@ -21,7 +21,7 @@ import { mapGetters } from 'vuex';
       }
      },
     async created () {
-     this.$store.dispatch('getVideo', 'assets/videos/Cam_01.mp4')
+     this.$store.dispatch('getVideo', 'Cam_01.mp4')
     }
   }
 </script>

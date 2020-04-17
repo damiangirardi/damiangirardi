@@ -15,7 +15,7 @@ export const actions = {
     getVideo  (context, url) {
         console.log(url);
         return axios({
-            url: `http://localhost:3000/_nuxt/${url}`,
+            url: `~assets/videos/${url}`,
             method: "GET",
             responseType: "blob"
           }).then((response) => {
