@@ -2,18 +2,70 @@
 	<footer>
 		<div class="container-fluid px-0">
 			<div class="row no-gutters">
-				<div class="col-6 breadcrumb-footer">
+				<div class="col-md-6 col-12 breadcrumb-footer">
 					<a href="#!">PROYECTO</a>
 					<a href="#!">THE VILLAGE</a>
 					<a href="#!">EDIFICIO 1002</a>
 				</div>
-				<div class="col-6 data-footer">
+				<div class="col-md-6 col-12 data-footer">
 					<div class="row no-gutters">
 						<div class="col-8">
 							<div class="apto">
-								<a href="#!">APTO. 3B</a>
+								<div class="apto-box">
+									<a href="#!" @click.prevent="toggleAptoinfo()">APTO. 3A</a>
+									<div class="apto-info" v-show="isAptoInfo">
+										<div class="bot">
+											<ul>
+												<li>
+													<img src="~assets/images/icons/fullscreen.svg" alt="m2">
+													<p>90.85 m2</p>
+												</li>
+												<li>
+													<img src="~assets/images/icons/bed.svg" alt="recamara">
+													<p>1 Recamara</p>
+												</li>
+												<li>
+													<img src="~assets/images/icons/estudio.svg" alt="estudio">
+													<p>Estudio</p>
+												</li>
+												<li>
+													<img src="~assets/images/icons/toilet.svg" alt="toilet">
+													<p>2.5 Baños</p>
+												</li>
+												<li>
+													<img src="~assets/images/icons/balcon.svg" alt="balcon">
+													<p>Balcón</p>
+												</li>
+												<li>
+													<img src="~assets/images/icons/vestidores.svg" alt="vestidor">
+													<p>Vestidor</p>
+												</li>
+												<li>
+													<img src="~assets/images/icons/washing-machine.svg" alt="lavanderia">
+													<p>Lavandería</p>
+												</li>
+												<li>
+													<img src="~assets/images/icons/sports-car.svg" alt="parking">
+													<p>1 Parking</p>
+												</li>
+											</ul>
+											<div class="subtitle">
+												<h4>Caracteristícas</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+
 								<span class="divisor"></span>
-								<a href="#!">APTO. 3C</a>
+
+								<div class="apto-box">
+									<a href="#!" @click.prevent="toggleAptoinfo()">APTO. 3A</a>
+									<!-- <div class="apto-info" v-show="isAptoInfo">
+										<div class="title">
+											<p>Acceder</p>
+										</div>
+									</div> -->
+								</div>
 							</div>
 						</div>
 						<div class="col-2 offset-2">
@@ -42,8 +94,23 @@
 
 <script>
 	export default {
-    data (){
-      return{}
+    data () {
+      return {
+      	isAptoInfo: false,
+      }
+    },
+    watch: {
+    $route(to, from) {
+		if (this.isAptoInfo) {
+				this.toggleAptoinfo()
+			}
+		}
+  	},
+    methods: {
+    	toggleAptoinfo(){
+    		this.isAptoInfo = !this.isAptoInfo
+    		this.$emit('aptoInfoStatus', this.isAptoInfo)
+    	}
     }
   }
 </script>
@@ -105,14 +172,55 @@
 				justify-content: space-around;
 				align-items: center;
 				height: 44px;
-				a{
-					color: #7b7b7b;
-					font-weight: 600;
-					font-style: italic;
-					font-size: 18px;
-
-					&:hover{
-						text-decoration: none;
+				.apto-box{
+					position: relative;
+					width: 50%;
+					a{
+						color: #7b7b7b;
+						font-weight: 600;
+						font-style: italic;
+						font-size: 18px;
+						text-align: center;
+						display: block;
+						&:hover{
+							text-decoration: none;
+						}
+					}
+					.apto-info{
+						position: absolute;
+						bottom: 130%;
+						background-color: #fff;
+						width: 100%;
+						.bot{
+							ul{
+								padding: 0;
+								margin: 10px 10px 10px 25px;
+								li{
+									list-style: none;
+									display: flex;
+									align-items: center;
+									justify-content: flex-start;
+									p{
+										margin: 0;
+										font-size: 14px;
+										color: #666;
+									}
+									img{
+										height: 20px;
+										margin-right: 10px;
+									}
+								}
+							}
+							.subtitle{
+								background-color: #212121;
+								h4{
+									margin: 0 0 0 25px;
+									padding: 5px 0;
+									color: #ddd;
+									font-size: 14px;
+								}
+							}
+						}
 					}
 				}
 			}
