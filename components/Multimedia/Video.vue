@@ -1,10 +1,10 @@
 <template>
   <div id="wrapVideo">
-    <div class="loading" :class="{'active': !videoLoaded }">
-      <img src="~assets/images/logo_green_park.png" width="160px" alt="green park logo" class="logo mb-4">
-      <b-spinner variant="success" label="Loading..."></b-spinner>
+    <div class="loading bg-loading"
+      v-bind:style="{ 'background-image' : 'url('+pathAssets+''+pathImageInit+')' }"
+      :class="{'active': !videoLoaded }">
     </div>
-    <video muted src="~assets/videos/Cam_01.mp4"></video>
+    <video muted :src="pathVideo"></video>
     <div class="wrapImage" :class="{'active': isEnabled }">
       <img :src="require('~/'+pathImage)" width="100%" height="100%" alt />
     </div>
@@ -12,15 +12,18 @@
 </template>
 <script>
 import axios from "axios";
+import {ENV, CURRENT_ENV} from '~/store/environment'
 export default {
   data() {
     return {
       isEnabled: false,
       videoLoaded: false,
-      interval: null
+      interval: null,
+      pathAssets: ENV[CURRENT_ENV].ASSETS_URL
     };
   },
   props: {
+    pathImageInit: String,
     pathVideo: String,
     pathImage: String
   },
@@ -43,18 +46,14 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.loading {
-    position: absolute;
-    z-index: 3;
-    height: 100%;
-    width: 100%;
-    background-color: white;
-    opacity: 0;
-    transition: opacity .5s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+.bg-loading {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  position: absolute;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity .5s;
   &.active {
     opacity: 1;
   }
@@ -63,7 +62,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100vh;
-  video, .loading {
+  video, .bg-loading{
     width: 100%;
     height: 100vh;
     object-fit: cover;
