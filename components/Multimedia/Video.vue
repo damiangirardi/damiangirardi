@@ -1,12 +1,13 @@
 <template>
   <div id="wrapVideo">
     <div class="loading bg-loading"
-      v-bind:style="{ 'background-image' : 'url('+pathAssets+''+pathImageInit+')' }"
+      :style="{'background-image': 'url(' + require('assets/images/'+pathImageInit) + ')'}"
       :class="{'active': !videoLoaded }">
     </div>
-    <video muted :src="pathVideo"></video>
+    <video muted  autoplay :src="pathVideo">
+    </video>
     <div class="wrapImage" :class="{'active': isEnabled }">
-      <img :src="require('~/'+pathImage)" width="100%" height="100%" alt />
+      <img :src="require('assets/images/posterVideos/'+pathImage)" width="100%" height="100%" alt />
     </div>
   </div>
 </template>
@@ -18,8 +19,7 @@ export default {
     return {
       isEnabled: false,
       videoLoaded: false,
-      interval: null,
-      pathAssets: ENV[CURRENT_ENV].ASSETS_URL
+      interval: null
     };
   },
   props: {
@@ -29,7 +29,6 @@ export default {
   },
   mounted() {
     let video = document.querySelector("video");
-    video.play()
     video.addEventListener("loadedmetadata", () => {
       this.interval = setInterval(() => {
         if (video.currentTime > 0.2) {
