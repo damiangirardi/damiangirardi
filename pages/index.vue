@@ -28,19 +28,20 @@
     </section>
   </div>
 </template>
-
 <script>
+import { mapGetters } from 'vuex';
   export  default {
      name: 'Home',
      layout: 'default-with-header-footer',
      data() {
       return {
-
       }
-     }
+     },
+    async created () {
+     this.$store.dispatch('getVideo', 'Cam_01.mp4')
+    }
   }
 </script>
-
 <style lang="scss" scoped>
   #home{
     .h-100{
@@ -61,7 +62,7 @@
       display: inline-block;
       width: 185px;
       color: #fff;
-      background-color: #f36f21;
+      background-color: $orange-default;
     }
   }
 </style>

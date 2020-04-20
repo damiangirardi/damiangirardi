@@ -43,8 +43,14 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    'bootstrap-vue/nuxt'
+    'bootstrap-vue/nuxt',
+    '@nuxtjs/style-resources'
   ],
+  styleResources: {
+    scss: [
+        'assets/style/main.scss'
+    ]
+  },
 
   serverMiddleware: ['~/servermiddleware/seo.js'],
 
