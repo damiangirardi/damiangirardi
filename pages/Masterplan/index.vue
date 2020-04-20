@@ -2,6 +2,7 @@
   <div id="home">
     <Video width='100%' height="100%" 
       :pathVideo="videoHome"
+      :pathImageInit="videoInit.pathImageInit"
       :pathImage="videoInit.pathImage">
     </Video>
   </div>
@@ -16,15 +17,15 @@ import Video from '~/components/Multimedia/Video'
       Video
     },
     computed: {
-        ...mapGetters({
-          videoHome: 'videos'
-        })
+      ...mapGetters({
+        videoHome: 'videos'
+      })
     },
     data() {
       return {
         videoInit:  {
-          pathVideo: 'assets/videos/Cam_01.mp4',
-          pathImage: 'assets/videos/Fot_01_home.jpg'
+          pathImage: 'assets/videos/Fot_01_home.jpg',
+          pathImageInit: 'images/home_green_park.jpg'
         },
         cardData: {
           image: 'assets/images/14@2x.png',
