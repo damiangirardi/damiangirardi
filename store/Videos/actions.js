@@ -7,7 +7,7 @@ const actions = {
     return axios({
       url: `${ENV[CURRENT_ENV].BASE_URL}videos/${pathVideo}`,
       method: "GET",
-      resºonseType: "blob"
+      responseType: "blob"
     }).then((response) => {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       context.commit('storeVideo', url)
