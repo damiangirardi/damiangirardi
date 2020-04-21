@@ -5,7 +5,6 @@ import Router from 'vue-router'
 import Home from '~/pages/index'
 import Masterplan from '~/pages/Masterplan/index'
 import Apartamentos from '~/pages/Apartamentos/index'
-import Apartamentos from '~/pages/Apartamentos/index'
 
 
 Vue.use(Router)
