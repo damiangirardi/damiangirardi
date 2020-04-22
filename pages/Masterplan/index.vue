@@ -2,7 +2,7 @@
   <div id="home">
     <Video width='100%' height="100%" 
       :pathVideo="videoHome"
-      :pathImage="videoInit.pathImage">> 
+      :pathImage="videoInit.pathImage">
     </Video>
   </div>
 </template>
@@ -10,7 +10,8 @@
 import { mapGetters } from 'vuex';
 import Video from '~/components/Multimedia/Video'
   export  default {
-    name: 'Test',
+    name: 'Masterplan',
+    // layout: 'default-with-header-footer',
     components: {
       Video
     },
@@ -23,7 +24,7 @@ import Video from '~/components/Multimedia/Video'
       return {
         videoInit:  {
           pathVideo: 'assets/videos/Cam_01.mp4',
-          pathImage: 'assets/images/14@2x.png'
+          pathImage: 'assets/videos/Fot_01_home.jpg'
         },
         cardData: {
           image: 'assets/images/14@2x.png',
