@@ -1,4 +1,7 @@
 import Videos from './Videos'
+import Masterplan from './Masterplan'
 
-export default Videos
-export const strict = false
+export default {
+    'Videos': Videos,
+    'Masterplan': Masterplan
+}
