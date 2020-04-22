@@ -7,9 +7,10 @@
     </Video>
   </div>
 </template>
+
 <script>
-import { mapGetters } from 'vuex';
-import Video from '~/components/Multimedia/Video'
+  import { mapGetters } from 'vuex';
+  import Video from '~/components/Multimedia/Video'
   export  default {
     name: 'Masterplan',
     // layout: 'default-with-header-footer',
