@@ -18,19 +18,19 @@
 						<img src="~assets/images/logo_green_park.png" alt="green park logo" class="logo">
 					</div>
 					<div class="col-4 d-flex align-items-center justify-content-end">
-						<div class="icon">
+						<div class="icon" v-b-tooltip.hover title="Compartir">
 							<img src="~assets/images/icons/ICONOS_MenuArriba_COMPARTIR.png" alt="compartir">
 						</div>
-						<div class="icon">
+						<div class="icon" v-b-tooltip.hover title="Contactarnos"  @click="toggleModal('contacto')">
 							<img src="~assets/images/icons/ICONOS_MenuArriba_CONTACTO.png" alt="contacto">
 						</div>
-						<div class="icon">
+						<div class="icon" v-b-tooltip.hover title="Contactanos por Whatsapp">
 							<img src="~assets/images/icons/ICONOS_MenuArriba_WHATSAPP.png" alt="whats app">
 						</div>
-						<div class="icon">
+						<div class="icon" v-b-tooltip.hover title="Agregar a mis favoritos">
 							<img src="~assets/images/icons/ICONOS_MenuArriba_FAVORITOS.png" alt="favoritos">
 						</div>
-						<div class="icon border-none">
+						<div class="icon border-none" v-b-tooltip.hover title="Reservar">
 							<img src="~assets/images/icons/ICONOS_MenuArriba_RESEVAR.png" alt="reservar">
 						</div>
 					</div>
@@ -103,6 +103,59 @@
 			</div>
 		</header>
 		<div :class="{over: isMenuOpen}"/>
+
+		<!-- modals -->
+
+		<transition
+	      name="modal"
+	      mode="out-in">
+	      <div
+	        v-if="showModal != ''"
+	        class="preview-modal">
+	        <!-- CONTAINER -->
+	        <div
+	          class="preview-modal__container"
+	          @click="$event.stopPropagation();">
+
+	          <!-- body modal -->
+	          <!-- contacto -->
+	          <div class="preview-modal__body">
+	          	<div class="close-modal" @click="showModal = ''">x</div>
+	            <div class="row">
+	            	<div class="col-12">
+	            		<h3 class="title text-center">Contacto</h3>
+	            	</div>
+	            	<div class="col-md-12 input-box">
+	            		<label for="name">Nombre*</label>
+	            		<input type="text" name="name">
+	            	</div>
+	            	<div class="col-md-12 input-box">
+	            		<label for="email">Email*</label>
+	            		<input type="text" name="email">
+	            	</div>
+	            	<div class="col-md-12 input-box">
+	            		<label for="phone">Telefono*</label>
+	            		<input type="number" name="phone">
+	            	</div>
+	            	<div class="col-md-12 input-box">
+	            		<label for="info">Solicitar más información de:</label>
+	            		<input type="text" name="info">
+	            	</div>
+	            	<div class="col-md-12 input-box">
+	            		<label for="msg">Mensaje*</label>
+	            		<textarea type="text" name="msg"/>
+	            	</div>
+	            	<div class="col-12 text-center">
+	            		<button class="my-3">Enviar</button>
+	            	</div>
+	            </div>
+	          </div>
+
+	        </div>
+	        <!-- CONTAINER END -->
+
+	      </div>
+	    </transition>
 	</div>
 </template>
 
@@ -111,7 +164,8 @@
     data (){
       return{
       	isMenuOpen: false,
-      	isSubMenuOpen: false
+      	isSubMenuOpen: false,
+      	showModal: ''
       }
     },
     watch: {
@@ -136,6 +190,11 @@
     	toggleSubMenuOpen(){
     		this.isSubMenuOpen = !this.isSubMenuOpen
     		this.$emit('subMenuStatus', this.isSubMenuOpen)
+    	},
+    	toggleModal(modal){
+    		if (this.showModal === ''){
+    			this.showModal = modal
+    		}
     	}
     }
   }
@@ -347,6 +406,84 @@
 		}
 	}
 
+	.preview-modal {
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100vh;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  background-color: rgba(50, 50, 50, 0.5);
+	  z-index: 999;
+	  .close-modal{
+	  	position: absolute;
+	  	top: 0;
+	  	right: 10px;
+	  	font-size: 28px;
+	  	color: #333;
+	  	transition: transform .2s ease;
+	  	cursor: pointer;
+		z-index: 4;
+		text-align: center;
+		width: 25px;
+	  	&:hover{
+	  		transform: scale(.9);
+	  	}
+	  }
+
+	  .preview-modal__container {
+	    width: 60%;
+	    border-radius: 4px;
+	    background-color: #cdcdcb;
+	    box-shadow: 0 3px 6px 0 #666;
+	    max-width: 95%;
+	    margin: auto;
+	    text-align: left;
+	    @media screen and (max-width: 767px) {
+	      width: 95%;
+	    }
+
+
+	    .preview-modal__body {
+			padding: 15px;
+			position: relative;
+			overflow: auto;
+			height: 90vh;
+			overflow: auto;
+	     	.input-box{
+	     		display: flex;
+	     		flex-direction: column;
+	     		margin-bottom: 25px;
+	     		input,
+	     		textarea{
+	     			width: 100%;
+	     			background-color: #efefef;
+	     			border: none;
+	     			padding: 5px 10px;
+	     			&:focus{
+	     				outline-style: none;
+	     			}
+	     		}
+	     		textarea{
+	     			height: 150px;
+	     		}
+	     	}
+	    }
+	  }
+	  button{
+	  	border: none;
+	  	background-color: $orange-default;
+	  	color: #fff;
+	  	font-size: 16px;
+	  	width: 180px;
+	  	padding: 10px 0;
+	  }
+	}
+
+	// transitions
+
 	.slide-left-enter-active,
   	.slide-left-leave-active {
     	transition: all 0.4s ease;
@@ -356,7 +493,7 @@
   }
   	.slide-left-leave-to{
   		 transform: translateX(-100%);
-  	}
+  }
   	.slide-left-short-enter-active,
   	.slide-left-short-leave-active {
     	transition: all 0.4s ease;
@@ -366,8 +503,20 @@
 	  opacity: 0;
   }
   	.slide-left-short-leave-to{
-  		 transform: translateX(-10px);
-  		 opacity: 0;
-  	}
+  		transform: translateX(-10px);
+  		opacity: 0;
+  }
+
+  	.modal-enter-active,
+  	.modal-leave-active {
+    	transition: all 0.2s ease;
+  }
+  	.modal-enter {
+	  opacity: 0;
+  }
+  	.modal-leave-to{
+  		opacity: 0;
+  }
+
 
 </style>

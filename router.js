@@ -4,7 +4,7 @@ import Router from 'vue-router'
 // pages
 import Home from '~/pages/index'
 import Masterplan from '~/pages/Masterplan/index'
-import Apartamentos from '~/pages/Apartamentos/index'
+import Topview from '~/pages/Topview/index'
 
 
 Vue.use(Router)
@@ -25,8 +25,8 @@ export function	createRouter() {
 			},
 			{
 				path: '/topview',
-				name: 'Apartamentos',
-				component: Apartamentos
+				name: 'Topview',
+				component: Topview
 			}
 		]
 	})

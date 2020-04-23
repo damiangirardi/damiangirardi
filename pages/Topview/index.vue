@@ -16,7 +16,7 @@
   import LeftBar from '~/components/NavigationBar/LeftBar'
 
   export  default {
-     name: 'Edificio1011',
+     name: 'Topview',
      layout: 'default-with-header-footer',
      components: {
       RightBar,

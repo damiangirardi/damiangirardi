@@ -2,15 +2,15 @@
   <div>
     <nav>
       <ul>
-        <li><img src="~/assets/images/icons/ICONOS_MenuIzquierda_PLANTA.png" alt="planta"></li>
-        <li><img src="~/assets/images/icons/ICONOS_MenuIzquierda_VISTA 3D.png" alt="vista 3d"></li>
-        <li><img src="~/assets/images/icons/ICONOS_MenuIzquierda_DIMENSIONES.png" alt="dimensiones"></li>
-        <li><img src="~/assets/images/icons/ICONOS_MenuIzquierda_IMAGENES.png" alt="imagenes"></li>
-        <li><img src="~/assets/images/icons/ICONOS_MenuIzquierda_VISTAS.png" alt="vistas"></li>
-        <li><img src="~/assets/images/icons/ICONOS_MenuIzquierda_ACABADOS.png" alt="acabados"></li>
-        <li><img src="~/assets/images/icons/ICONOS_MenuIzquierda_VIDEO.png" alt="videos"></li>
-        <li><img src="~/assets/images/icons/ICONOS_MenuIzquierda_BROCHURE.png" alt="pdf"></li>
-        <li><img src="~/assets/images/icons/ICONOS_MenuIzquierda_VR360.png" alt="vr360"></li>
+        <li v-b-tooltip.hover.right title="Plano"><img src="~/assets/images/icons/ICONOS_MenuIzquierda_PLANTA.png" alt="planta"></li>
+        <li v-b-tooltip.hover.right title="Vista"><img src="~/assets/images/icons/ICONOS_MenuIzquierda_VISTA 3D.png" alt="vista 3d"></li>
+        <li v-b-tooltip.hover.right title="Dimensiones"><img src="~/assets/images/icons/ICONOS_MenuIzquierda_DIMENSIONES.png" alt="dimensiones"></li>
+        <li v-b-tooltip.hover.right title="Imágenes"><img src="~/assets/images/icons/ICONOS_MenuIzquierda_IMAGENES.png" alt="imagenes"></li>
+        <li v-b-tooltip.hover.right title="Vistas"><img src="~/assets/images/icons/ICONOS_MenuIzquierda_VISTAS.png" alt="vistas"></li>
+        <li v-b-tooltip.hover.right title="Acabados"><img src="~/assets/images/icons/ICONOS_MenuIzquierda_ACABADOS.png" alt="acabados"></li>
+        <li v-b-tooltip.hover.right title="Vídeos"><img src="~/assets/images/icons/ICONOS_MenuIzquierda_VIDEO.png" alt="videos"></li>
+        <li v-b-tooltip.hover.right title="Brochure"><img src="~/assets/images/icons/ICONOS_MenuIzquierda_BROCHURE.png" alt="pdf"></li>
+        <li v-b-tooltip.hover.right title="VR 360º"><img src="~/assets/images/icons/ICONOS_MenuIzquierda_VR360.png" alt="vr360"></li>
       </ul>
     </nav>
   </div>
