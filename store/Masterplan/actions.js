@@ -2,17 +2,20 @@ const listFiles = [
   {
     id: 0,
     type: 'image',
-    path: 'ocen_home.jpg'
+    visible: true,
+    path: 'posterVideos/Fot_01_home.jpg'
   },
   {
-    id: 0,
+    id: 1,
     type: 'image',
+    visible: false,
     path: 'posterVideos/Fot_03_B.jpg'
   },
   {
-    id: 0,
+    id: 2,
     type: 'image',
-    path: 'posterVideos/Fot_03_B.jpg'
+    visible: false,
+    path: 'posterVideos/Fot_02_A.jpg'
   }
 ]
 const actions = {

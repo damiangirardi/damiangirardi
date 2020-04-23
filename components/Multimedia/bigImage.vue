@@ -1,5 +1,7 @@
 <template>
-  <img :src="path" alt=""  width="100%" height="100%">
+  <div>
+    <img :src="require('assets/images/'+path)" alt="">
+  </div>
 </template>
 
 <script>
@@ -17,7 +19,7 @@ export default {
 <style lang="scss" scoped>
 img {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   object-fit: cover;
 }
 </style>

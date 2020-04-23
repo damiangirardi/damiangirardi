@@ -1,13 +1,17 @@
 <template>
   <div id="home">
-    <Video width='100%' height="100%" 
-      :pathVideo="videoHome"
-      :pathImageInit="videoInit.pathImageInit"
-      @finishVideo="finishVideo()"
-      :pathImage="videoInit.pathImage">
-    </Video>
+    <div class="wrapVideo">
+      <Video width='100%' height="100%" 
+        :pathVideo="videoHome"
+        class="mainVideo"
+        :pathImageInit="videoInit.pathImageInit"
+        @finishVideo="finishVideo()"
+        :pathImage="videoInit.pathImage">
+      </Video>
+    </div>
     <div class="wrapSpin" :class="{'active': showSpin }">
-      <Spin 
+      <Spin
+        class="mainSpin"
         :files="spinFiles"
         :pathImage="videoInit.pathImage">
       </Spin>
@@ -38,6 +42,7 @@ import Spin from '~/components/Multimedia/Spin'
           pathVideo: 'videos/masterplan/Cam_01.mp4'
         },
         showSpin: false,
+        hideVideo: false,
         cardData: {
           image: 'assets/images/14@2x.png',
           titleImage: 'Lorem ipsum',
@@ -58,13 +63,24 @@ import Spin from '~/components/Multimedia/Spin'
     position: absolute;
     top: 0px;
     left: 0px;
-    z-index: 1;
+    z-index: 3;
     width: 100%;
     height: 100%;
-    opacity: 0;
-    transition: opacity .5s;
-    &.active {
-      opacity: 1;
+    .mainSpin {
+      opacity: 0;
+      transition: opacity .5s;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
+    &.active {
+      .mainSpin {
+        opacity: 1;
+      }
+    }
+  }
+  .wrapVideo {
+    width: 100%;
+    height: 100%;
   }
 </style>

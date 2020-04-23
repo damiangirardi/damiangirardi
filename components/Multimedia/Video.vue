@@ -1,5 +1,5 @@
 <template>
-  <div id="wrapVideo">
+  <div id="wrapComponent">
     <div class="loading bg-loading"
       :style="{'background-image': 'url(' + require('assets/images/'+pathImageInit) + ')'}"
       :class="{'active': !videoLoaded }">
@@ -52,7 +52,7 @@ export default {
     opacity: 1;
   }
 }
-#wrapVideo {
+#wrapComponent {
   position: relative;
   width: 100%;
   height: 100vh;
