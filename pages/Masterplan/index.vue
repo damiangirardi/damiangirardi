@@ -1,9 +1,8 @@
 <template>
   <div id="home">
     <div class="wrapVideo">
-      <Video width='100%' height="100%" 
+      <Video width='100%' height="100%" class="mainVideo"
         :pathVideo="videoHome"
-        class="mainVideo"
         :pathImageInit="videoInit.pathImageInit"
         @finishVideo="finishVideo()"
         :pathImage="videoInit.pathImage">
@@ -76,7 +75,7 @@ import Spin from '~/components/Multimedia/Spin'
     height: 100%;
     .mainSpin {
       opacity: 0;
-      transition: opacity .5s;
+      transition: opacity .3s ease-in-out;
       width: 100%;
       height: 100%;
       object-fit: cover;

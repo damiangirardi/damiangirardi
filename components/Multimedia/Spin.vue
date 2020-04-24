@@ -5,7 +5,7 @@
         <img src="~assets/images/icons/prev.svg" alt="">
       </button>
     </div>
-    <transition-group name="fade" tag="div">
+    <transition-group name="fade" tag="div" mode="out-in">
       <div class="item-file" v-for="i in [currentIndex]" :key="i">
         <bigImage
           v-if="currentFile.type === 'image'"
@@ -89,7 +89,7 @@ export default {
         &:focus{
           outline: none;
         }
-        svg{
+        img{
           height: 14px;
         }
       }
@@ -110,16 +110,20 @@ export default {
     }
   }
   .fade-enter-active, .fade-leave-active {
-    transition: all 0.9s ease;
+    transition: all .3s ease;
     overflow: hidden;
     visibility: visible;
     position: absolute;
     width:100%;
     opacity: 1;
   }
-  .fade-enter, .fade-leave-to {
+  .fade-enter, 
+  .fade-leave-to {
     visibility: hidden;
     width:100%;
     opacity: 0;
+  }
+  .fade-leave-to{
+    transition-delay: .3s;
   }
 </style>

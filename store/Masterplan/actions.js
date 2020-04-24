@@ -2,26 +2,34 @@ import Videos from '../Videos/index'
 const listFiles = [
   {
     id: 0,
-    type: 'image',
-    visible: true,
-    pathImageInit: '',
-    path: 'posterVideos/Fot_01_home.jpg',
-    origin: 'spin',
-  },
-  {
-    id: 1,
     type: 'video',
-    visible: false,
+    visible: true,
     pathImageInit: 'posterVideos/Fot_01_home.jpg',
     path: 'Cam_02_A_1.mp4',
     origin: 'spin',
   },
   {
+    id: 1,
+    type: 'video',
+    visible: true,
+    pathImageInit: 'posterVideos/Fot_01_home.jpg',
+    path: 'Cam_02_A_2.mp4',
+    origin: 'spin',
+  },
+  {
     id: 2,
-    type: 'image',
-    visible: false,
-    pathImageInit: '',
-    path: 'posterVideos/Fot_02_A.jpg',
+    type: 'video',
+    visible: true,
+    pathImageInit: 'posterVideos/Fot_03_B.jpg',
+    path: 'Cam_02_B.mp4',
+    origin: 'spin',
+  },
+  {
+    id: 3,
+    type: 'video',
+    visible: true,
+    pathImageInit: 'posterVideos/Fot_03_B.jpg',
+    path: 'Cam_02_C.mp4',
     origin: 'spin',
   }
 ]
