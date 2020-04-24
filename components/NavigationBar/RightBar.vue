@@ -3,26 +3,7 @@
     <nav>
       <div class="arrow"></div>
       <ul ref="scrollContainer">
-        <li>1</li>
-        <li class="select">2</li>
-        <li>3</li>
-        <li>4</li>
-        <li class="sold">5</li>
-        <li>6</li>
-        <li>7</li>
-        <li>8</li>
-        <li>9</li>
-        <li>10</li>
-        <li>11</li>
-        <li>12</li>
-        <li>13</li>
-        <li>14</li>
-        <li>15</li>
-        <li>16</li>
-        <li>17</li>
-        <li>18</li>
-        <li>19</li>
-        <li>20</li>      
+        <li v-for="(apto, i) in aptos" :key="i" :class="apto.sold ? 'sold' : null" @click="toggleImageDepto(apto.image)">{{apto.number}}</li>    
       </ul>
       <div class="arrow bot"></div>
     </nav>
@@ -32,13 +13,21 @@
 <script>
   export  default {
      name: 'RightBar',
-
+     props:{
+      aptos: Array,
+      required: true,
+      default: () => {}
+     },
      data() {
       return {
-        message: 'hello world'
+        bgImage: '1011-B1'
       }
      },
      methods: {
+      toggleImageDepto(img){
+        this.bgImage = img
+        this.$emit('bgImagenDepto', this.bgImage)
+      }
      }
   }
 </script>

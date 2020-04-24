@@ -1,10 +1,13 @@
 <template>
-  <section class="edificio-bg">
+  <section class="edificio-bg" :style="{ backgroundImage: 'url(' + require('@/assets/images/edificios/' + backgroundUrl + '.jpg') + ')' }">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
           <LeftBar/>
-          <RightBar/>
+          <RightBar
+          :aptos="aptos"
+          @toggleImageDepto="backgroundUrl = 'holaaa'"
+          />
         </div>
       </div>
     </div>
@@ -24,7 +27,15 @@
      },
      data() {
       return {
+        backgroundUrl: '1011-B2',
+        aptos: [
+          {number: '00', sold: false, image: '1011-B1'},
+          {number: '01', sold: false, image: '1011-B2'},
+          {number: '02', sold: false, image: '1011-B2-A'},
+          {number: '03', sold: true,  image: '1011-B2-B'},
+          {number: '04', sold: false, image: '1011-B3'},
 
+        ]
       }
      }
   }
