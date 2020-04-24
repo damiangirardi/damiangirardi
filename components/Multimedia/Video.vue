@@ -4,7 +4,7 @@
       :style="{'background-image': 'url(' + require('assets/images/'+pathImageInit) + ')'}"
       :class="{'active': !videoLoaded }">
     </div>
-    <video muted  autoplay :src="pathVideo">
+    <video muted autoplay :src="pathVideo">
     </video>
   </div>
 </template>
