@@ -1,4 +1,4 @@
-const CURRENT_ENV = 'production';
+const CURRENT_ENV = 'development';
 
 const ENV = {
   development: {
