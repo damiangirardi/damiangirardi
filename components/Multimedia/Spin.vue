@@ -45,17 +45,14 @@ export default {
   methods: {
     next: function() {
       this.currentIndex += 1;
-      localStorage.setItem('files', this.files)
-      this.$router.push({path: this.$route.path, query: { id: this.currentIndex }})
     },
     prev: function() {
       this.currentIndex -= 1;
-      this.$router.push({path: this.$route.path, query: { id: this.currentIndex }})
     },
   },
   computed: {
     currentFile: function() {
-      if (this.files) {
+      if (this.files.length) {
         return this.files[Math.abs(this.currentIndex) % this.files.length];
       }
     }
