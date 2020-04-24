@@ -1,10 +1,10 @@
 <template>
   <div id="wrapComponent">
-    <div class="loading bg-loading"
+    <div class="loading bg-loading" v-if="pathImageInit"
       :style="{'background-image': 'url(' + require('assets/images/'+pathImageInit) + ')'}"
       :class="{'active': !videoLoaded }">
     </div>
-    <video muted  autoplay :src="pathVideo">
+    <video muted autoplay :src="pathVideo.path">
     </video>
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
   },
   props: {
     pathImageInit: String,
-    pathVideo: String,
+    pathVideo: Object,
   },
   mounted() {
     let video = document.querySelector("video");

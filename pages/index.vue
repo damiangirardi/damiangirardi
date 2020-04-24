@@ -44,9 +44,8 @@ import { mapGetters } from 'vuex';
         loadingVideo: false
       }
      },
-    async created () {
-     this.$store.dispatch('Videos/getVideo', 'masterplan/Cam_01.mp4')
-     this.$store.dispatch('Masterplan/getSpin')
+    created () {
+       this.$store.dispatch('Videos/getVideo', {id: null, path: 'masterplan/Cam_01.mp4', origin: 'home' })
     }
   }
 </script>

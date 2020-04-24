@@ -1,49 +1,63 @@
 <template>
   <div class="wrapComponent">
-    <button class="link left" @click="prev">
-      {{ prevIcon }}
-    </button>
+    <div class="link left" @click="prev">
+      <button>
+        <img src="~assets/images/icons/prev.svg" alt="">
+      </button>
+    </div>
     <transition-group name="fade" tag="div">
       <div class="item-file" v-for="i in [currentIndex]" :key="i">
         <bigImage
-          :path="currentImg.path">
+          v-if="currentFile.type === 'image'"
+          :path="currentFile.path">
         </bigImage>
+        <Video
+          v-if="currentFile.type === 'video'"
+          :pathVideo="currentFile">
+        </Video>
       </div>
     </transition-group>
-    <button class="link right" @click="next">
-      {{ nextIcon }}
-    </button>
+    <div class="link right" @click="next">
+      <button>
+        <img src="~assets/images/icons/prev.svg" alt="">
+      </button>
+    </div>
   </div>
 </template>
 <script>
 import bigImage from '~/components/Multimedia/bigImage'
+import Video from '~/components/Multimedia/Video'
+import router from '../../router';
 export default {
   data () {
     return {
       timer: null,
-      currentIndex: 0,
-      prevIcon: '<',
-      nextIcon: '>'
+      currentIndex: 0
     }
   },
   components :{
-    bigImage
+    bigImage,
+    Video
   },
   props: {
-    files:Array,
-    pathImage: String,
+    files:Array
   },
   methods: {
     next: function() {
       this.currentIndex += 1;
+      localStorage.setItem('files', this.files)
+      this.$router.push({path: this.$route.path, query: { id: this.currentIndex }})
     },
     prev: function() {
       this.currentIndex -= 1;
-    }
+      this.$router.push({path: this.$route.path, query: { id: this.currentIndex }})
+    },
   },
   computed: {
-    currentImg: function() {
-      return this.files[Math.abs(this.currentIndex) % this.files.length];
+    currentFile: function() {
+      if (this.files) {
+        return this.files[Math.abs(this.currentIndex) % this.files.length];
+      }
     }
   }
 }
@@ -59,23 +73,42 @@ export default {
       top: 0px;
     }
     .link {
-      margin-left: 30px;
-      width: 50px;
-      height: 50px;
-      background-color: $orange-default;
+      width: 15%;
+      height: 100%;
       outline: none;
       color: white;
       border: none ;
-      border-radius: 30px;
-      margin-right: 30px;
       position: relative;
       z-index: 1;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      button{
+        border: none;
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        background-color: $orange-default;
+        &:focus{
+          outline: none;
+        }
+        svg{
+          height: 14px;
+        }
+      }
       &.left {
-        margin-right: auto;
+        justify-content: flex-start;
+        button{
+          margin-left: 50px;
+          transform: rotate(180deg);
+        }
       }
       &.right {
         margin-left: auto;
+        justify-content: flex-end;
+        button{
+          margin-right: 50px;
+        }
       }
     }
   }
