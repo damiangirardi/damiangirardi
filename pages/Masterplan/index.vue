@@ -12,8 +12,7 @@
     <div class="wrapSpin" :class="{'active': showSpin }">
       <Spin
         class="mainSpin"
-        :files="spinFiles"
-        :pathImage="videoInit.pathImage">
+        :files="spinFiles">
       </Spin>
     </div>
   </div>
@@ -28,12 +27,6 @@ import Spin from '~/components/Multimedia/Spin'
       Video,
       Spin
     },
-    computed: {
-      ...mapGetters({
-        videoHome: 'Videos/videos',
-        spinFiles: 'Masterplan/spinFiles'
-      })
-    },
     data() {
       return {
         videoInit:  {
@@ -41,6 +34,7 @@ import Spin from '~/components/Multimedia/Spin'
           pathImageInit: 'home_green_park.jpg',
           pathVideo: 'videos/masterplan/Cam_01.mp4'
         },
+        mapSpinFiles: [],
         showSpin: false,
         hideVideo: false,
         cardData: {
@@ -49,6 +43,20 @@ import Spin from '~/components/Multimedia/Spin'
           description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi facere iure ipsum vel laudantium ullam nam voluptates incidunt quo, dicta dolor esse id dolores?'
         }
       }
+    },
+    computed: {
+      ...mapGetters({
+        videoHome: 'Videos/videos',
+        spinFiles: 'Masterplan/spinFiles'
+      })
+    },
+    created () {
+      this.$store.dispatch('Masterplan/getSpin')
+      this.spinFiles.forEach((element, index) => {
+        if (element.type === 'video') {
+          this.$store.dispatch('Videos/getVideo', element)
+        }
+      })
     },
     methods: {
       finishVideo() {
