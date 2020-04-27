@@ -4,12 +4,12 @@
       <Video width='100%' height="100%" class="mainVideo"
         :pathVideo="videoHome"
         :pathImageInit="videoInit.pathImageInit"
+        :playVideo="playVideo"
         :isReverse="false"
-        @finishVideo="finishVideo()"
-        :pathImage="videoInit.pathImage">
+        @finishVideo="finishVideo()">
       </Video>
     </div>
-    <div class="wrapSpin" :class="{'active': showSpin }">
+    <div class="wrapSpin" :class="{'active': playSpin }">
       <Spin
         class="mainSpin"
         :files="spinFiles">
@@ -30,11 +30,11 @@ import Spin from '~/components/Multimedia/Spin'
     data() {
       return {
         videoInit:  {
-          pathImage: 'Fot_01_home.jpg',
           pathImageInit: 'home_green_park.jpg',
           pathVideo: 'videos/masterplan/Cam_01.mp4'
         },
-        showSpin: false,
+        playSpin: false,
+        playVideo: true,
         cardData: {
           image: 'assets/images/14@2x.png',
           titleImage: 'Lorem ipsum',
@@ -59,7 +59,8 @@ import Spin from '~/components/Multimedia/Spin'
     },
     methods: {
       finishVideo() {
-        this.showSpin = true
+        this.playSpin = true
+        this.playVideo = false
       }
     }
   }

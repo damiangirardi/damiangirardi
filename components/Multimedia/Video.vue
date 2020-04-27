@@ -4,7 +4,7 @@
       :style="{'background-image': 'url(' + require('assets/images/'+pathImageInit) + ')'}"
       :class="{'active': !videoLoaded }">
     </div>
-    <video muted autoplay :src="pathVideo.path">
+    <video @ended="finishVideo()" autoplay muted :src="pathVideo.path">
     </video>
   </div>
 </template>
@@ -24,14 +24,13 @@ export default {
       type: Boolean,
       default: false
     },
+    playVideo: Boolean,
     pathVideo: Object,
   },
   mounted() {
     let video = document.querySelector("video");
-    let startSystemTime = new Date().getTime();
     this.timeInterval = this.isReverse === false ? 30 : 200;
     video.addEventListener("loadedmetadata", () => {
-      
       this.interval = setInterval(() => {
         let startVideoTime = video.currentTime;
         if (!this.isReverse) {
@@ -44,6 +43,7 @@ export default {
             clearInterval(this.interval);
           }
         } else {
+          let startSystemTime = new Date().getTime();
           video.playbackRate = 1.0;
           if(video.currentTime == 0){
               clearInterval(this.interval);
@@ -57,6 +57,11 @@ export default {
       }, this.timeInterval);
     });
   },
+  methods: {
+    finishVideo() {
+      this.$emit('finishVideo')
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

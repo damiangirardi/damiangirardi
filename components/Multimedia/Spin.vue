@@ -1,24 +1,28 @@
 <template>
-  <div class="wrapComponent">
-    <div class="link left" @click="prev">
+  <div class="wrapComponent" >
+    <div class="link left" @click="prev" :class="{'isClicked': transitionActive}">
       <button>
         <img src="~assets/images/icons/prev.svg" alt="">
       </button>
     </div>
-    <transition-group name="fade" tag="div" mode="out-in">
-      <div class="item-file" v-for="i in [currentIndex]" :key="i">
+    <transition name="fade" tag="div" mode="out-in">
+      <!-- <div class="item-file" v-for="i in files" :key="i" > -->
+      <div class="item-file" >
         <bigImage
-          v-if="currentFile.type === 'image'"
-          :path="currentFile.path">
+          v-if="files[currentIndex].type === 'image'"
+          :path="files[currentIndex].path">
         </bigImage>
         <Video
-          v-if="currentFile.type === 'video'"
+          v-if="files[currentIndex].type === 'video'"
           :isReverse="isReverse"
-          :pathVideo="currentFile">
+          :pathImageInit="files[currentIndex].pathImageInit"
+          @finishVideo="finishVideo()"
+          :playVideo="autoPlay"
+          :pathVideo="files[currentIndex]">
         </Video>
       </div>
-    </transition-group>
-    <div class="link right" @click="next">
+    </transition>
+    <div class="link right" @click="next" :class="{'isClicked': transitionActive}">
       <button>
         <img src="~assets/images/icons/prev.svg" alt="">
       </button>
@@ -34,7 +38,9 @@ export default {
     return {
       timer: null,
       currentIndex: 0,
-      isReverse: false
+      isReverse: false,
+      autoPlay: false,
+      transitionActive: false
     }
   },
   components :{
@@ -46,21 +52,41 @@ export default {
   },
   methods: {
     next: function() {
-      this.isReverse = false
-      this.currentIndex += 1;
+      if (!this.transitionActive) {
+        this.isReverse = false
+        if (this.currentIndex === this.files.length -1) {
+          this.currentIndex = 0
+        } else {
+          this.currentIndex += 1;
+        }
+        this.transitionActive = true
+        this.autoPlay = true
+      }
     },
     prev: function() {
-      this.isReverse = true
-      this.currentIndex -= 1;
+      if (!this.transitionActive) {
+        this.isReverse = true
+        if (this.currentIndex === 0) {
+          this.currentIndex =  this.files.length -1
+        } else {
+          this.currentIndex -= 1;
+        }
+        this.transitionActive = true
+        this.autoPlay = true
+      }
     },
+    finishVideo (){
+      this.transitionActive = false
+      this.autoPlay = false
+    }
   },
-  computed: {
+/*   computed: {
     currentFile: function() {
       if (this.files.length) {
         return this.files[Math.abs(this.currentIndex) % this.files.length];
       }
     }
-  }
+  } */
 }
 </script>
 
@@ -110,6 +136,9 @@ export default {
         button{
           margin-right: 50px;
         }
+      }
+      &.isClicked {
+        opacity: 0.6;
       }
     }
   }
