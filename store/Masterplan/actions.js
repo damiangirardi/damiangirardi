@@ -19,7 +19,7 @@ const listFiles = [
     pathSeed: 'Cam_02_B.mp4',
     converted: false,
     origin: 'spin',
-  }, *//*,
+  },
   {
     id: 3,
     type: 'video',
