@@ -4,6 +4,7 @@
       <Video width='100%' height="100%" class="mainVideo"
         :pathVideo="videoHome"
         :pathImageInit="videoInit.pathImageInit"
+        :isReverse="false"
         @finishVideo="finishVideo()"
         :pathImage="videoInit.pathImage">
       </Video>
@@ -33,9 +34,7 @@ import Spin from '~/components/Multimedia/Spin'
           pathImageInit: 'home_green_park.jpg',
           pathVideo: 'videos/masterplan/Cam_01.mp4'
         },
-        mapSpinFiles: [],
         showSpin: false,
-        hideVideo: false,
         cardData: {
           image: 'assets/images/14@2x.png',
           titleImage: 'Lorem ipsum',
@@ -50,11 +49,12 @@ import Spin from '~/components/Multimedia/Spin'
       })
     },
     created () {
-      this.$store.dispatch('Masterplan/getSpin')
-      this.spinFiles.forEach((element, index) => {
-        if (element.type === 'video') {
-          this.$store.dispatch('Videos/getVideo', element)
-        }
+      this.$store.dispatch('Masterplan/getSpin').then(() => {
+        this.spinFiles.forEach((element, index) => {
+          if (element.type === 'video' && element.converted === false) {
+            this.$store.dispatch('Videos/getVideo', element)
+          }
+        })
       })
     },
     methods: {

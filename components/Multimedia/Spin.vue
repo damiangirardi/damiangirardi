@@ -13,6 +13,7 @@
         </bigImage>
         <Video
           v-if="currentFile.type === 'video'"
+          :isReverse="isReverse"
           :pathVideo="currentFile">
         </Video>
       </div>
@@ -32,7 +33,8 @@ export default {
   data () {
     return {
       timer: null,
-      currentIndex: 0
+      currentIndex: 0,
+      isReverse: false
     }
   },
   components :{
@@ -44,9 +46,11 @@ export default {
   },
   methods: {
     next: function() {
+      this.isReverse = false
       this.currentIndex += 1;
     },
     prev: function() {
+      this.isReverse = true
       this.currentIndex -= 1;
     },
   },

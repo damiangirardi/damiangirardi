@@ -9,32 +9,52 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 import {ENV, CURRENT_ENV} from '~/store/environment'
 export default {
   data() {
     return {
       videoLoaded: false,
-      interval: null
+      interval: null,
+      timeInterval: 0
     };
   },
   props: {
     pathImageInit: String,
+    isReverse: {
+      type: Boolean,
+      default: false
+    },
     pathVideo: Object,
   },
   mounted() {
     let video = document.querySelector("video");
+    let startSystemTime = new Date().getTime();
+    this.timeInterval = this.isReverse === false ? 30 : 200;
     video.addEventListener("loadedmetadata", () => {
+      
       this.interval = setInterval(() => {
-        if (video.currentTime > 0.2) {
-          this.videoLoaded = true
+        let startVideoTime = video.currentTime;
+        if (!this.isReverse) {
+          if (startVideoTime > 0.2) {
+            this.videoLoaded = true
+          }
+          let timeVideo = video.duration - startVideoTime;
+          if (timeVideo <= 0.2) {
+            this.$emit('finishVideo')
+            clearInterval(this.interval);
+          }
+        } else {
+          video.playbackRate = 1.0;
+          if(video.currentTime == 0){
+              clearInterval(this.interval);
+              video.pause();
+          } else {
+              let elapsed = new Date().getTime()-startSystemTime;
+              log.textContent='Rewind Elapsed: '+elapsed.toFixed(3);
+              video.currentTime = Math.max(startVideoTime - elapsed*rewindSpeed/1000.0, 0);
+          }
         }
-        let timeVideo = video.duration - video.currentTime;
-        if (timeVideo <= 0.2) {
-          this.$emit('finishVideo')
-          clearInterval(this.interval);
-        }
-      }, 200);
+      }, this.timeInterval);
     });
   },
 };

@@ -6,6 +6,7 @@ const listFiles = [
     visible: true,
     pathImageInit: 'posterVideos/Fot_01_home.jpg',
     path: 'Cam_02_A_1.mp4',
+    converted: false,
     origin: 'spin',
   },
   {
@@ -14,6 +15,7 @@ const listFiles = [
     visible: true,
     pathImageInit: 'posterVideos/Fot_01_home.jpg',
     path: 'Cam_02_A_2.mp4',
+    converted: false,
     origin: 'spin',
   },
   {
@@ -22,6 +24,7 @@ const listFiles = [
     visible: true,
     pathImageInit: 'posterVideos/Fot_03_B.jpg',
     path: 'Cam_02_B.mp4',
+    converted: false,
     origin: 'spin',
   },
   {
@@ -30,6 +33,7 @@ const listFiles = [
     visible: true,
     pathImageInit: 'posterVideos/Fot_03_B.jpg',
     path: 'Cam_02_C.mp4',
+    converted: false,
     origin: 'spin',
   }
 ]
