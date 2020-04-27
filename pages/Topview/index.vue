@@ -16,6 +16,7 @@
 
 <script>
   import { mapGetters } from 'vuex'
+  
   import RightBar from '~/components/NavigationBar/RightBar'
   import LeftBar from '~/components/NavigationBar/LeftBar'
 

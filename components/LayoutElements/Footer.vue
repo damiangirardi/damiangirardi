@@ -123,7 +123,7 @@
 			height: 44px;
 			a{	
 				padding: 0 30px;
-				background-color: #f36f21;
+				background-color: $orange-default;
 				color: #fff;
 				font-size: 16px;
 				position: relative;
@@ -137,7 +137,7 @@
 				    height: 0px;
 				    border-bottom: 22px solid transparent; 
 				    border-top: 22px solid transparent;
-				    border-left: 22px solid #f36f21;
+				    border-left: 22px solid $orange-default;
 				    font-size: 0px;
 				    line-height: 0px;
 				    right: -22px;
