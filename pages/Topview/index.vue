@@ -6,7 +6,7 @@
           <LeftBar/>
           <RightBar
           :aptos="aptos"
-          @toggleImageDepto="backgroundUrl = 'holaaa'"
+          @bgImagenDepto="backgroundUrl = $event"
           />
         </div>
       </div>
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   import RightBar from '~/components/NavigationBar/RightBar'
   import LeftBar from '~/components/NavigationBar/LeftBar'
 
@@ -27,17 +28,14 @@
      },
      data() {
       return {
-        backgroundUrl: '1011-B2',
-        aptos: [
-          {number: '00', sold: false, image: '1011-B1'},
-          {number: '01', sold: false, image: '1011-B2'},
-          {number: '02', sold: false, image: '1011-B2-A'},
-          {number: '03', sold: true,  image: '1011-B2-B'},
-          {number: '04', sold: false, image: '1011-B3'},
-
-        ]
+        backgroundUrl: '1011-B5'
       }
-     }
+     },
+     computed: {
+      ...mapGetters({
+        aptos: 'Topview/deptoView',
+      })
+     },
   }
 </script>
 
@@ -54,5 +52,6 @@
     height: 100vh;
     width: 100%;
     position: relative;
+    transition: background-image .3s ease-in-out .1s;
   }
 </style>

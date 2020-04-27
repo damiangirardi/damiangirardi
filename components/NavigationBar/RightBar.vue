@@ -3,7 +3,10 @@
     <nav>
       <div class="arrow"></div>
       <ul ref="scrollContainer">
-        <li v-for="(apto, i) in aptos" :key="i" :class="apto.sold ? 'sold' : null" @click="toggleImageDepto(apto.image)">{{apto.number}}</li>    
+        <li v-for="(apto, i) in aptos" :key="i" :class="[{sold: apto.sold, select: apto.image === bgImage}]" 
+        @click="toggleImageDepto(apto.image)">
+          {{apto.number}}
+        </li>    
       </ul>
       <div class="arrow bot"></div>
     </nav>
@@ -11,6 +14,7 @@
 </template>
 
 <script>
+
   export  default {
      name: 'RightBar',
      props:{
@@ -20,8 +24,11 @@
      },
      data() {
       return {
-        bgImage: '1011-B1'
+        bgImage: ''
       }
+     },
+     computed: {
+      
      },
      methods: {
       toggleImageDepto(img){
