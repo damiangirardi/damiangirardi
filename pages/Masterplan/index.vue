@@ -16,6 +16,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import { mapGetters } from 'vuex';
 import Video from '~/components/Multimedia/Video'
