@@ -1,14 +1,11 @@
 <template>
-  <div id="wrapVideo">
-    <div class="loading bg-loading"
+  <div id="wrapComponent">
+    <div class="loading bg-loading" v-if="pathImageInit"
       :style="{'background-image': 'url(' + require('assets/images/'+pathImageInit) + ')'}"
       :class="{'active': !videoLoaded }">
     </div>
-    <video muted  autoplay :src="pathVideo">
+    <video muted autoplay :src="pathVideo.path">
     </video>
-    <div class="wrapImage" :class="{'active': isEnabled }">
-      <img :src="require('assets/images/posterVideos/'+pathImage)" width="100%" height="100%" alt />
-    </div>
   </div>
 </template>
 <script>
@@ -17,15 +14,13 @@ import {ENV, CURRENT_ENV} from '~/store/environment'
 export default {
   data() {
     return {
-      isEnabled: false,
       videoLoaded: false,
       interval: null
     };
   },
   props: {
     pathImageInit: String,
-    pathVideo: String,
-    pathImage: String
+    pathVideo: Object,
   },
   mounted() {
     let video = document.querySelector("video");
@@ -36,7 +31,7 @@ export default {
         }
         let timeVideo = video.duration - video.currentTime;
         if (timeVideo <= 0.2) {
-          this.isEnabled = true
+          this.$emit('finishVideo')
           clearInterval(this.interval);
         }
       }, 200);
@@ -57,7 +52,7 @@ export default {
     opacity: 1;
   }
 }
-#wrapVideo {
+#wrapComponent {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -66,32 +61,5 @@ export default {
     height: 100vh;
     object-fit: cover;
   }
-  .wrapImage {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity .5s;
-    }
-    &.active {
-      img {
-        opacity: 1;
-      }
-    }
-  }
-}
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
 }
 </style>

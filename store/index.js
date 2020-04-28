@@ -1,9 +1,7 @@
-export const state = () => ({})
+import Videos from './Videos'
+import Masterplan from './Masterplan'
 
-export const getters = {}
-
-export const mutations = {}
-
-export const actions = {}
-
-export const strict = false
+export default {
+    'Videos': Videos,
+    'Masterplan': Masterplan
+}
