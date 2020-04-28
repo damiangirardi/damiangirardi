@@ -3,7 +3,9 @@
     <header-comp/>
       
     <!-- main content -->
-    <nuxt />
+    
+      <nuxt />
+   
 
     <footer-comp/>
   </div>
@@ -23,3 +25,10 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .separator{
+    margin-top: 65.39px;
+    margin-bottom: 44px;
+  }
+</style>

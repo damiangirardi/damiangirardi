@@ -116,6 +116,11 @@
 <style lang="scss" scoped>
 	footer{
 		background-color: #dedede;
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		left: 0;
+		right: 0;
 		.breadcrumb-footer{
 			display: flex;
 			align-items: center;
@@ -161,7 +166,6 @@
 					background-color: transparent;
 					padding-left: 45px;
 					color: #7b7b7b;
-					border: 1px solid #7b7b7b;
 					border-right: none;
 					&:after{
 						border-left-color: #dedede;
@@ -178,7 +182,7 @@
 					    height: 0px;
 					    border-bottom: 22px solid transparent; 
 					    border-top: 22px solid transparent;
-					    border-left: 22px solid #7b7b7b;
+					    border-left: 22px solid rgba(123, 123, 123, .5);
 					    font-size: 0px;
 					    line-height: 0px;
 					    right: -22px;

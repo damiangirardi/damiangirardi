@@ -50,7 +50,7 @@
     background-repeat: no-repeat;
     background-position: bottom center;
     background-image: url(~assets/images/edificios/1011-B5.jpg);
-    height: 100vh;
+    height: 99.9vh;
     width: 100%;
     position: relative;
     transition: background-image .3s ease-in-out .1s;

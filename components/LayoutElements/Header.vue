@@ -204,8 +204,12 @@
 	header{
 		background-color: #fff;
 		padding: 15px 0;
-		position: relative;
+		position: absolute;
 		z-index: 5;
+		top: 0;
+		width: 100%;
+		left: 0;
+		right: 0;
 		.menu{
 			display: flex;
 			align-items: center;
