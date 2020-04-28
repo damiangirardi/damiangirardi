@@ -2,7 +2,7 @@
   <div>
       
     <!-- main content -->
-    <nuxt />
+    <!-- <nuxt /> -->
 
   </div>
 </template>

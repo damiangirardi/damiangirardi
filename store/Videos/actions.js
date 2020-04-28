@@ -1,24 +1,23 @@
-import axios from 'axios';
-import { ENV, CURRENT_ENV } from './../environment'
 const actions = {
-  getVideo(context, element) {
+  getVideo({ commit }, element) {
+    // Nombre del video
     let pathVideo =  element.path
-    return axios({
-      url: `${ENV[CURRENT_ENV].BASE_URL}videos/${pathVideo}`,
+    return this.$axios({
+      url: `videos/${pathVideo}`,
       method: "GET",
       responseType: "blob"
-    }).then((response) => {
+    }).then( response => {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const obj = {
-        id: element.id,
+        id: typeof element.id != 'undefined' ? element.id : null,
         path: url
       }
       if (element.origin === 'home') {
-        context.commit('storeVideo', obj)
+        commit('storeVideo', obj)
       } else {
-        context.commit('Masterplan/updateVideo', obj, {root: true})
+        commit('Masterplan/updateVideo', obj, {root: true})
       }
-      return url
+      return obj
     }).catch((error) => {
       console.log(error);
     })

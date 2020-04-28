@@ -12,14 +12,14 @@
           v-if="files[currentIndex].type === 'image'"
           :path="files[currentIndex].path">
         </bigImage>
-        <Video
+        <CustomVideo
           v-if="files[currentIndex].type === 'video'"
           :isReverse="isReverse"
           :pathImageInit="files[currentIndex].pathImageInit"
           @finishVideo="finishVideo()"
           :playVideo="autoPlay"
           :pathVideo="files[currentIndex]">
-        </Video>
+        </CustomVideo>
       </div>
     </transition>
     <div class="link right" @click="next" :class="{'isClicked': transitionActive}">
@@ -31,7 +31,7 @@
 </template>
 <script>
 import bigImage from '~/components/Multimedia/bigImage'
-import Video from '~/components/Multimedia/Video'
+import CustomVideo from '~/components/Multimedia/CustomVideo'
 import router from '../../router';
 export default {
   data () {
@@ -45,7 +45,7 @@ export default {
   },
   components :{
     bigImage,
-    Video
+    CustomVideo
   },
   props: {
     files:Array
@@ -79,14 +79,7 @@ export default {
       this.transitionActive = false
       this.autoPlay = false
     }
-  },
-/*   computed: {
-    currentFile: function() {
-      if (this.files.length) {
-        return this.files[Math.abs(this.currentIndex) % this.files.length];
-      }
-    }
-  } */
+  }
 }
 </script>
 

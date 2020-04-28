@@ -19,6 +19,12 @@ export default {
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },
+
+  /// VARIABLES DE ENTORNO
+  env: {
+    baseUrl: process.env.BASE_VIDEO_URL || 'http://localhost:3000/'
+  },
+
   /*
   ** Global CSS
   */
@@ -33,6 +39,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    {src: '~/plugins/bus.js'}
   ],
   /*
   ** Nuxt.js dev-modules
@@ -44,8 +51,11 @@ export default {
   */
   modules: [
     'bootstrap-vue/nuxt',
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    '@nuxtjs/axios',
+    '@nuxtjs/router'
   ],
+
   styleResources: {
     scss: [
         'assets/style/main.scss'
@@ -59,7 +69,7 @@ export default {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    // baseURL: process.env.API_URL || 'http://localhost:3001/'
+    baseURL: process.env.BASE_VIDEO_URL || 'http://localhost:3000/'
   },
   /*
   ** Build configuration

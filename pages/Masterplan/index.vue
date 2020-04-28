@@ -1,69 +1,83 @@
 <template>
   <div id="home">
-    <div class="wrapVideo">
-      <Video width='100%' height="100%" class="mainVideo"
-        :pathVideo="videoHome"
+    <div class="wrapVideo" v-if="!loading">
+      <CustomVideo width='100%' height="100%" class="mainVideo"
+        :pathVideo="videoInit"
         :pathImageInit="videoInit.pathImageInit"
         :playVideo="playVideo"
-        :isReverse="false"
-        @finishVideo="finishVideo()">
-      </Video>
+        @finishVideo="finishVideo()" />
     </div>
     <div class="wrapSpin" :class="{'active': playSpin }">
-      <Spin
+      <!-- <Spin
         class="mainSpin"
         :files="spinFiles">
-      </Spin>
+      </Spin> -->
     </div>
   </div>
 </template>
+
 <script>
-import { mapGetters } from 'vuex';
-import Video from '~/components/Multimedia/Video'
+import { mapGetters } from 'vuex'
+import CustomVideo from '~/components/Multimedia/CustomVideo'
 import Spin from '~/components/Multimedia/Spin'
-  export  default {
-    name: 'Masterplan',
-    components: {
-      Video,
-      Spin
-    },
-    data() {
-      return {
-        videoInit:  {
-          pathImageInit: 'home_green_park.jpg',
-          pathVideo: 'videos/masterplan/Cam_01.mp4'
-        },
-        playSpin: false,
-        playVideo: true,
-        cardData: {
-          image: 'assets/images/14@2x.png',
-          titleImage: 'Lorem ipsum',
-          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi facere iure ipsum vel laudantium ullam nam voluptates incidunt quo, dicta dolor esse id dolores?'
-        }
-      }
-    },
-    computed: {
-      ...mapGetters({
-        videoHome: 'Videos/videos',
-        spinFiles: 'Masterplan/spinFiles'
-      })
-    },
-    created () {
-      this.$store.dispatch('Masterplan/getSpin').then(() => {
-        this.spinFiles.forEach((element, index) => {
+export  default {
+  name: 'Masterplan',
+  layout: 'main-layout',
+  components: {
+    CustomVideo,
+    Spin
+  },
+  data() {
+    return {
+      loading: true,
+      videoInit:  {
+        pathImageInit: 'home_green_park.jpg',
+        path: ''
+      },
+      playSpin: false,
+      playVideo: true
+    }
+  },
+  computed: {
+    ...mapGetters({
+      videoHome: 'Videos/videos',
+      spinFiles: 'Masterplan/spinFiles'
+    })
+  },
+  created () {
+    if (this.videoHome) {
+      this.videoInit.path = this.videoHome.path
+      this.loading = false
+    } else {
+      this.$store
+        .dispatch('Videos/getVideo', {
+          path: 'masterplan/Cam_01.mp4', 
+          origin: 'home' }
+        )
+        .then( res => {
+          this.videoInit.path = res.path
+          this.loading = false
+        })
+    }
+
+    this.$store.dispatch('Masterplan/getSpin')
+      .then(res => {
+        res.forEach( element => {
           if (element.type === 'video' && element.converted === false) {
             this.$store.dispatch('Videos/getVideo', element)
           }
         })
       })
-    },
-    methods: {
-      finishVideo() {
-        this.playSpin = true
-        this.playVideo = false
-      }
+  },
+  methods: {
+    finishVideo() {
+      this.$bus.$emit('toggleHeader', true)
+      this.$bus.$emit('toggleFooter', true)
+      this.playSpin = true
+      this.playVideo = false
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -32,8 +32,9 @@ const listFiles = [
   }
 ]
 const actions = {
-  getSpin(context) {
-    context.commit('storeSpin', listFiles)
+  getSpin({ commit }) {
+    commit('storeSpin', listFiles)
+    return listFiles
   }
 }
 

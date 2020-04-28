@@ -144,7 +144,11 @@
 	header{
 		background-color: #fff;
 		padding: 15px 0;
-
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: 9;
 		.menu{
 			display: flex;
 			align-items: center;
