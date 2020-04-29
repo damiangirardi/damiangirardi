@@ -20,12 +20,12 @@ export function	createRouter() {
 			},
 			{
 				path: '/masterplan',
-				name: 'Masterplan',
+				name: 'masterplan',
 				component: Masterplan
 			},
 			{
 				path: '/topview',
-				name: 'Topview',
+				name: 'topview',
 				component: Topview
 			}
 		]
