@@ -169,19 +169,23 @@ export  default {
     },
     goNext() {
       this.searchVideo('after')
-      if( this.indice < (this.guide.length - 1)) {
-        this.indice ++
-      } else {
-        this.indice = 0
-      }
+      setTimeout(() => {
+        if( this.indice < (this.guide.length - 1)) {
+          this.indice ++
+        } else {
+          this.indice = 0
+        }
+      }, 800)
     },
     goBack() {
       this.searchVideo('before')
-      if (this.indice > 0) {
-        this.indice --
-      } else {
-        this.indice = this.guide.length - 1
-      }
+      setTimeout(() => {
+        if (this.indice > 0) {
+          this.indice --
+        } else {
+          this.indice = this.guide.length - 1
+        }
+      }, 800)
     },
     searchVideo(type) {
       let route = type === 'after' ? 'videoAfter' : 'videoBefore'
