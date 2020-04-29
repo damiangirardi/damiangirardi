@@ -24,5 +24,17 @@ export default {
         }).catch((error) => {
           console.log(error);
         })
-      }
+    },
+    getSpinVideos({commit}, video) {
+        return this.$axios({
+            url: `videos/${video}`,
+            method: 'GET',
+            responseType: "blob"
+        }).then( response => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            return url
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
 }

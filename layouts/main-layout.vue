@@ -1,45 +1,20 @@
 <template>
   <div id="layout">
-      <div id="header" v-if="showHeader">
-          <HeaderComp />
-      </div>
-      <div id="content">
+    <div id="content">
         <transition name="fade">
             <nuxt />
         </transition>
-      </div>
-      <div id="footer" v-if="showFooter">
-          <FooterComp />
-      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HeaderComp from '~/components/LayoutElements/Header'
-import FooterComp from '~/components/LayoutElements/Footer'
+
 export default {
     name: 'main-layout',
-    components: {
-        HeaderComp,
-        FooterComp
-    },
     data() {
         return {
-            showHeader: false,
-            showFooter: false
         }
-    },
-    created() {
-        this.showHeader = typeof this.$route.meta.showHeader != 'undefined' ? this.$route.meta.showHeader : false
-        this.showFooter = typeof this.$route.meta.showFooter != 'undefined' ? this.$route.meta.showFooter : false
-    },
-    mounted() {
-        this.$bus.$on('toggleHeader', value => {
-            this.showHeader = value
-        })
-        this.$bus.$on('toggleFooter', value => {
-            this.showFooter = value
-        })
     }
 }
 </script>
