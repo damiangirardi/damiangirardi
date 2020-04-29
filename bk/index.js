@@ -1,7 +1,9 @@
 import Videos from './Videos'
 import Masterplan from './Masterplan'
+import Proyect from './Proyect'
 
 export default {
-    'Videos': Videos,
-    'Masterplan': Masterplan
+    Videos,
+    Masterplan,
+    Proyect
 }

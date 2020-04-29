@@ -1,12 +1,30 @@
 <template>
-  <div id="home">
-    <div class="wrapVideo" v-if="!loading">
+  <div id="home" v-if="!loading">
+
+    <!-- IMAGEN PREVIA -->
+    <img :src="require('assets/images/' + initialStep.image)" v-if="showInitialImage" :class="{off: videoLoaded}" class="prev-image">
+    <!-- IMAGEN PREVIA END -->
+
+    <!-- VIDEOS -->
+    <video 
+      id="myVideo"
+      v-if="video.length"
+      muted
+      :src="video" 
+      class="mainVideo"></video>
+    <!-- VIDEOS END -->
+
+
+
+    <!-- <div class="wrapVideo" v-if="!loading">
       <CustomVideo width='100%' height="100%" class="mainVideo"
         :pathVideo="videoInit"
         :pathImageInit="videoInit.pathImageInit"
         :playVideo="playVideo"
         @finishVideo="finishVideo()" />
-    </div>
+    </div> -->
+
+
     <div class="wrapSpin" :class="{'active': playSpin }">
       <!-- <Spin
         class="mainSpin"
@@ -18,91 +36,123 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import CustomVideo from '~/components/Multimedia/CustomVideo'
-import Spin from '~/components/Multimedia/Spin'
+// import CustomVideo from '~/components/Multimedia/CustomVideo'
+// import Spin from '~/components/Multimedia/Spin'
 export  default {
   name: 'Masterplan',
   layout: 'main-layout',
   components: {
-    CustomVideo,
-    Spin
+    // CustomVideo,
+    // Spin
   },
   data() {
     return {
       loading: true,
-      videoInit:  {
-        pathImageInit: 'home_green_park.jpg',
-        path: ''
-      },
+      indice: 0,
+      video: '',
+      interval: null,
+      videoLoaded: false,
+      showInitialImage: false,
+
+    
       playSpin: false,
       playVideo: true
     }
   },
+  watch: {
+    video(value) {
+      if (value.length) {
+        setTimeout(() => {
+          let video = document.querySelector("video");
+          video.addEventListener("loadedmetadata", () => {
+            video.play()
+            this.interval = setInterval(() => {
+              if (video.currentTime > 0.2) {
+                this.videoLoaded = true
+              }
+              let timeVideo = video.duration - video.currentTime;
+              if (timeVideo <= 0.2) {
+                this.finishVideo()
+                clearInterval(this.interval);
+              }
+            }, this.timeInterval);
+          });
+        }) 
+      }
+    }
+  },
   computed: {
     ...mapGetters({
-      videoHome: 'Videos/videos',
-      spinFiles: 'Masterplan/spinFiles'
+      initialStep: 'Proyect/initialStep',
+      guide: 'Proyect/guide'
+      // videoHome: 'Videos/videos',
+      // spinFiles: 'Masterplan/spinFiles'
     })
   },
   created () {
-    if (this.videoHome) {
-      this.videoInit.path = this.videoHome.path
-      this.loading = false
-    } else {
-      this.$store
-        .dispatch('Videos/getVideo', {
-          path: 'masterplan/Cam_01.mp4', 
-          origin: 'home' }
-        )
-        .then( res => {
-          this.videoInit.path = res.path
+    this.indice = 0 /// LUEGO REEMPLAZAR POR QUERY
+    this.$store.dispatch('Proyect/getSpin')
+      .then(() => {
+        if (typeof this.initialStep.video != 'undefined') {
+          this.video = this.initialStep.blob
           this.loading = false
-        })
-    }
-
-    this.$store.dispatch('Masterplan/getSpin')
-      .then(res => {
-        res.forEach( element => {
-          if (element.type === 'video' && element.converted === false) {
-            this.$store.dispatch('Videos/getVideo', element)
-          }
-        })
+        }
       })
+  },
+  mounted() {
+    // Si vengo con un video inicial
+    var video = document.getElementById('myVideo')
+    if (video) {
+      video.play()
+    }
   },
   methods: {
     finishVideo() {
       this.$bus.$emit('toggleHeader', true)
       this.$bus.$emit('toggleFooter', true)
-      this.playSpin = true
-      this.playVideo = false
+      this.video = ''
+      console.log('terminamos el video')
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .wrapSpin {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    z-index: 3;
+.prev-image {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  position: absolute; 
+  top: 0;
+  left: 0;
+  transition: opacity 3s;
+  z-index: 10;
+  &.off {
+    opacity: 0;
+  }
+}
+.wrapSpin {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  .mainSpin {
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+  }
+  &.active {
     .mainSpin {
-      opacity: 0;
-      transition: opacity .3s ease-in-out;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    &.active {
-      .mainSpin {
-        opacity: 1;
-      }
+      opacity: 1;
     }
   }
-  .wrapVideo {
-    width: 100%;
-    height: 100%;
-  }
+}
+.wrapVideo {
+  width: 100%;
+  height: 100%;
+}
 </style>

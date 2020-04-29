@@ -1,6 +1,6 @@
 <template>
-  <div id="home">
-    <section class="bg-green_park">
+  <div id="home" v-if="!loading">
+    <section class="bg-green_park" :style="{backgroundImage: 'url(' + require('@/assets/images/' + initialStep.image) + ')'}">
       <div class="container h-100">
         <div class="row justify-content-center align-items-end h-100">
           <div class="col-md-3 col-8 text-center">
@@ -18,15 +18,28 @@ export  default {
   layout: 'main-layout',
   data() {
     return {
-      loadingVideo: false
+      loading: true
     }
   },
+  computed: {
+    ...mapGetters({
+      initialStep: 'Proyect/initialStep'
+    })
+  },
   created () {
-      this.$store
-        .dispatch('Videos/getVideo', {
-          path: 'masterplan/Cam_01.mp4', 
-          origin: 'home' }
-        )
+    this.$store.dispatch('Proyect/startApp')
+      .then(() => {
+        this.loading = false
+        let obj = {
+          path: this.initialStep.video
+        }
+        this.$store.dispatch('Proyect/getVideo', obj)
+      })
+      // this.$store
+      //   .dispatch('Videos/getVideo', {
+      //     path: 'masterplan/Cam_01.mp4', 
+      //     origin: 'home' }
+      //   )
   },
   methods: {
   }
@@ -42,7 +55,7 @@ export  default {
       background-size: cover;
       background-repeat: no-repeat;
       background-position: bottom center;
-      background-image: url(~assets/images/home_green_park.jpg);
+      // background-image: url(~assets/images/home_green_park.jpg);
       height: 100vh;
       width: 100%;
     }
