@@ -16,16 +16,16 @@ export function	createRouter() {
 			{
 				path: '/',
 				name: 'home',
-				component: Home
+				component: Home,
 			},
 			{
 				path: '/masterplan',
-				name: 'Masterplan',
+				name: 'masterplan',
 				component: Masterplan
 			},
 			{
 				path: '/topview',
-				name: 'Topview',
+				name: 'topview',
 				component: Topview
 			}
 		]

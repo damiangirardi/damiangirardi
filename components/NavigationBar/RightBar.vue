@@ -46,11 +46,18 @@
     align-items: center;
     flex-direction: column;
     right: 0;
-    top: 1px;
-    width: 64px;
-    height: 99vh;
-    margin: 2px 0;
+    top: 51.5%;
+    transform: translateY(-50%);
+    width: 65px;
+    height: 84vh;
     background-color: #cccccc;
+    @media (max-height: 690px){
+      height: 80vh;
+    }
+    @media (max-height: 490px){
+      height: 72vh;
+      top: 52.8%;
+    }
     ul{
       scrollbar-width: none;
       -ms-overflow-style: none;

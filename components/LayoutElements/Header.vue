@@ -203,9 +203,12 @@
 <style lang="scss" scoped>
 	header{
 		background-color: #fff;
-		padding: 15px 0;
-		position: relative;
-		z-index: 5;
+		padding: 5px 0;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: 99;
 		.menu{
 			display: flex;
 			align-items: center;
@@ -289,7 +292,7 @@
 			width: 80%;
 			position: absolute;
 			left: 0;
-			top: 15px;
+			top: 5px;
 			bottom: 0;
 			display: flex;
 		    flex-direction: column;

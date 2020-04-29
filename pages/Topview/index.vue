@@ -1,5 +1,10 @@
 <template>
   <section class="edificio-bg" :style="{ backgroundImage: 'url(' + require('@/assets/images/edificios/' + backgroundUrl + '.jpg') + ')' }">
+
+    <div id="header" v-if="showHeader" key="header">
+      <HeaderComp />
+    </div>
+
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
@@ -11,6 +16,12 @@
         </div>
       </div>
     </div>
+
+    <div id="fooder" v-if="showFooter" key="footer">
+      <FooterComp 
+      :proyectName="proyectName" />
+    </div>
+
   </section>
 </template>
 
@@ -19,17 +30,24 @@
   
   import RightBar from '~/components/NavigationBar/RightBar'
   import LeftBar from '~/components/NavigationBar/LeftBar'
+  import HeaderComp from '~/components/LayoutElements/Header'
+  import FooterComp from '~/components/LayoutElements/Footer'
 
   export  default {
      name: 'Topview',
-     layout: 'default-with-header-footer',
+     layout: 'main-layout',
      components: {
       RightBar,
-      LeftBar
+      LeftBar,
+      HeaderComp,
+      FooterComp
      },
      data() {
       return {
-        backgroundUrl: '1011-B5'
+        backgroundUrl: '1011-B5',
+        showHeader: true,
+        showFooter: true,
+        proyectName: 'THE VILLAGE'
       }
      },
      computed: {
@@ -50,7 +68,7 @@
     background-repeat: no-repeat;
     background-position: bottom center;
     background-image: url(~assets/images/edificios/1011-B5.jpg);
-    height: 100vh;
+    height: 99.9vh;
     width: 100%;
     position: relative;
     transition: background-image .3s ease-in-out .1s;
