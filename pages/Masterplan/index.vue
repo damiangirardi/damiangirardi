@@ -2,7 +2,7 @@
   <div id="home" v-if="!loading">
 
     <!-- CREAR LA CLASE PARA TRANSITION -->
-    <transition name="transition-header">
+    <transition name="fade">
       <div id="header" v-if="showHeader" key="header">
         <HeaderComp />
       </div>
@@ -18,8 +18,17 @@
 
     <!-- SPIN -->
     <div class="spin" v-if="showSpin" :class="{active: animateSpin}">
-      <button @click.prevent="goBack" class="btn btn-back">Ir para atras</button>
-      <button @click.prevent="goNext" class="btn btn-next">Ir para adelante</button>
+      <div>
+        <button @click.prevent="goBack()" class="btn btn-back"><img src="~assets/images/icons/prev.svg"></button>
+      </div>
+
+      <div>
+        <button @click.prevent="goNext()" class="btn btn-next"><img src="~assets/images/icons/prev.svg"></button>
+      </div>
+
+      <!-- <button @click.prevent="goTop()" class="btn btn-back" v-if="typeof guide[indice].birdView !== 'undefined'">Ir arriba</button> -->
+
+     <!--  <button @click="goBot()" class="btn btn-back" v-if="birdView">Ir abajo</button> -->
     </div>
     <!-- SPIN END -->
 
@@ -33,11 +42,12 @@
     <!-- VIDEOS END -->
 
     <!-- CREAR LA CLASE PARA TRANSITION -->
-    <transition name="transition-footer">
-      <div id="header" v-if="showFooter" key="footer">
-        <FooterComp />
+    <transition-group key="initialFooter" name="fade">
+      <div id="fooder" v-if="showFooter" key="footer">
+        <FooterComp 
+        :proyectName="proyectName" />
       </div>
-    </transition>
+    </transition-group>
 
   </div>
 </template>
@@ -68,7 +78,8 @@ export  default {
       showSpin: false,
       animateSpin: false,
       videosBlob: [],
-      birdView: false
+      birdView: false,
+      proyectName: 'GREEN PARK'
     }
   },
 
@@ -79,6 +90,9 @@ export  default {
           let video = document.querySelector("video");
           video.addEventListener("loadedmetadata", () => {
             video.play()
+            this.animateSpin = false
+            this.showHeader = false
+            this.showFooter = false
             this.interval = setInterval(() => {
               if (video.currentTime > 0.2) {
                 this.videoLoaded = true
@@ -150,6 +164,8 @@ export  default {
           this.loading = false
           setTimeout(() => {
             this.animateSpin = true
+            this.showHeader = true
+            this.showFooter = true
           }, 500)
         }
       })
@@ -165,7 +181,14 @@ export  default {
 
   methods: {
     getFinalImage() {
-      return this.guide[this.indice].image
+      if (!this.birdView){
+        return this.guide[this.indice].image
+      }else {
+        return this.guide[this.indice].image
+        setTimeout(() => {
+          return this.guide[this.indice].birdView.image
+        }, 200)
+      }
     },
     goNext() {
       this.searchVideo('after')
@@ -187,12 +210,24 @@ export  default {
         }
       }, 800)
     },
+    goTop() {
+      this.birdView = true
+      this.searchVideo('after')
+      setTimeout(() => {
+         this.showNextImage = true 
+      }, 800)
+    },
+     goBot() {
+      this.birdView = false
+      this.searchVideo('before')
+    },
     searchVideo(type) {
       let route = type === 'after' ? 'videoAfter' : 'videoBefore'
       let path
       if (this.birdView) {
         path = this.guide[Number(this.indice)].birdView[route].path
       } else {
+
         path = this.guide[Number(this.indice)][route].path
       }
       let res = _.find(this.videosBlob, video => {
@@ -201,14 +236,14 @@ export  default {
       this.video = res.blob
     },
     finishVideo() {
-      // this.showHeader = true
-      // this.showFooter = true
       this.showSpin = true
       this.showNextImage = true
       setTimeout(() => {
         this.video = ''
         this.showInitialImage = false
         this.animateSpin = true
+        this.showHeader = true
+        this.showFooter = true
       }, 300)
     }
   }
@@ -247,6 +282,8 @@ export  default {
 
 .spin {
   width: 100%;
+  height: 40px;
+  overflow: hidden;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -254,11 +291,18 @@ export  default {
   .btn {
     position: absolute;
     top: 0;
-    background: white;
+    background: $orange-default;
     transition: transform .3s;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 0;
+    img{
+      width: 13px;
+    }
     &.btn-back {
       left: 20px;
-      transform: translateX(-200px);
+      transform: translateX(-200px) rotate(180deg);
     }
     &.btn-next {
       right: 20px;
@@ -267,9 +311,11 @@ export  default {
   }
   &.active {
     .btn {
-      &.btn-next,
-      &.btn-back {
+      &.btn-next{
         transform: translateX(0);
+      }
+      &.btn-back {
+        transform: translateX(0) rotate(180deg);
       }
     }
   }
@@ -298,5 +344,14 @@ export  default {
 .wrapVideo {
   width: 100%;
   height: 100%;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all .3s ease-in-out;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

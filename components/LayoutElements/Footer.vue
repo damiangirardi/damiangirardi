@@ -3,11 +3,11 @@
 		<div class="container-fluid px-0">
 			<div class="row no-gutters">
 				<div class="col-md-6 col-12 breadcrumb-footer">
-					<a href="#!">PROYECTO</a>
-					<a href="#!">THE VILLAGE</a>
-					<a href="#!">EDIFICIO 1002</a>
+					<a href="#!" class="text-uppercase">PROYECTO</a>
+					<a href="#!" class="text-uppercase" v-if="typeof protectName !== 'indefined'">{{proyectName}}</a>
+					<a href="#!" class="text-uppercase" v-if="typeof birdName !== 'undefined'">{{birdName}}</a>
 				</div>
-				<div class="col-md-6 col-12 data-footer">
+				<div v-if="typeof birdName !== 'undefined'" class="col-md-6 col-12 data-footer">
 					<div class="row no-gutters">
 						<div class="col-8">
 							<div class="apto">
@@ -94,10 +94,15 @@
 
 <script>
 	export default {
+	props:{
+		proyectName: String,
+		birdName: String
+
+	},
     data () {
-      return {
-      	isAptoInfo: false,
-      }
+		return {
+			isAptoInfo: false,
+		}
     },
     watch: {
     $route(to, from) {
@@ -122,7 +127,7 @@
 		bottom: 0;
 		left: 0;
 		width: 100%;
-		z-index: 9;
+		z-index: 99;
 		.breadcrumb-footer{
 			display: flex;
 			align-items: center;
