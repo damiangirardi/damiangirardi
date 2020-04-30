@@ -124,7 +124,7 @@
 		bottom: 0;
 		left: 0;
 		width: 100%;
-		z-index: 9;
+		z-index: 99;
 		.breadcrumb-footer{
 			display: flex;
 			align-items: center;
@@ -143,13 +143,13 @@
 					position: absolute;
 					display: inline-block;
 					width: 0px;
-				    height: 0px;
-				    border-bottom: 22px solid transparent; 
-				    border-top: 22px solid transparent;
-				    border-left: 22px solid $orange-default;
-				    font-size: 0px;
-				    line-height: 0px;
-				    right: -22px;
+          height: 0px;
+          border-bottom: 22px solid transparent; 
+          border-top: 22px solid transparent;
+          border-left: 22px solid $orange-default;
+          font-size: 0px;
+          line-height: 0px;
+          right: -22px;
 					z-index: 1;
 				}
 				&:nth-child(2){
