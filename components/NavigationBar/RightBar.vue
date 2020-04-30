@@ -1,19 +1,20 @@
 <template>
   <div class="wrap-right">
     <nav>
-      <div class="arrow"></div>
+      <div class="arrow center-nav"></div>
       <ul ref="scrollContainer">
         <li v-for="(apto, i) in aptos" :key="i" :class="[{sold: apto.sold, select: apto.image === bgImage.path}]" 
         @click="toggleImageDepto(apto.image)">
-          <div class="link">
+          <div class="link center-nav">
             {{apto.number}}
           </div>
          <div class="background">
+           <div class="square"></div>
            <div class="triangle"></div>
          </div>
         </li>    
       </ul>
-      <div class="arrow bot"></div>
+      <div class="arrow center-nav bot"></div>
     </nav>
     <div class="wrap-columnright"></div>
   </div>
@@ -70,7 +71,7 @@
     right: 0;
     height: 89%;
     top: 3%;
-    width: 69px;
+    width: 100%;
     ul{
       scrollbar-width: none;
       -ms-overflow-style: none;
@@ -95,27 +96,46 @@
           color: black;
         }
         .link {
+          width: 69px;
+          margin: auto;
           position: relative;
           color: black;
           z-index: 3;
         }
         &.select{
-          /* background-color: rgb(138, 67, 29); */
           .background {
-            z-index: 3;
-            position: absolute;
             z-index: 2;
-            width: 80px;
+            position: absolute;
+            width: 94px;
             height: 100%;
             top: 0px;
-            background-color: $orange-default;
-            left: -12px;
+            display: flex;
+            left: 0px;
+            flex-direction: row-reverse;
+            .square {
+              background-color: $orange-default;
+              height: 100%;
+              width: 80%;
+            }
+            .triangle {
+              width: 0;
+              height: 0;
+              border-top: 14px solid transparent;
+              border-right: 14px solid $orange-default;;
+              border-bottom: 14px solid transparent;
+            }
           }
         }
-        &:hover{
-          background-color: rgba(243, 112, 39, .4);
+        &:hover {
+          .link {
+            background-color: rgba(243, 112, 39, .4);
+          }
         }
       }
+    }
+    .center-nav {
+      position: relative;
+      left: 13px;
     }
     .arrow{
       cursor: pointer;
