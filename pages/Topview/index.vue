@@ -1,5 +1,8 @@
 <template>
-  <section class="edificio-bg">
+  <div>
+    <div id="header">
+      <HeaderComp />
+    </div>
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12 px-0">
@@ -18,7 +21,7 @@
       <FooterComp 
       :proyectName="proyectName" />
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
