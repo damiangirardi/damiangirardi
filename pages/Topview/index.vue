@@ -78,21 +78,4 @@
     left: 0px;
     z-index: 0;
   }
-  .fade-enter-active, .fade-leave-active {
-    transition: all .3s ease;
-    overflow: hidden;
-    visibility: visible;
-    position: absolute;
-    width:100%;
-    opacity: 1;
-  }
-  .fade-enter, 
-  .fade-leave-to {
-    visibility: hidden;
-    width:100%;
-    opacity: 0;
-  }
-  .fade-leave-to{
-    transition-delay: .3s;
-  }
 </style>
