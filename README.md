@@ -2,7 +2,36 @@
 
 > graff3d web aplication
 
-## Build Setup
+# Setup local development environment
+
+Initial setup (one time thing):
+
+    $ make virtualenv-update
+    $ make pip-sync
+
+Create the Docker image (this include `npm install`):
+
+    $ make docker-compose-build
+
+Launch the server:
+
+    $ make docker-compose-up
+
+## Update libraries
+
+If new packages are addad, or versions are updated, you'll need to run:
+
+    $ make docker-compose-build
+
+## Cleanup
+
+If for some reason you need a fresh start, do:
+
+    $ make docker-compose-clean
+    $ make docker-compose-build BUILD_ARGS=--no-cache
+
+
+# Original instructions
 
 ```bash
 # install dependencies

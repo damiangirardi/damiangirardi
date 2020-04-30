@@ -1,12 +1,29 @@
 version: "3.7"
 services:
   nuxt:
-    build: .
-    container_name: web3d
+    build:
+      context: .
+    container_name: web3d-frontend
     restart: "no"
     volumes:
-      - ./:/app
+      - type: bind
+        source: ./
+        target: /app
+      - type: volume
+        source: node_modules
+        target: /app/node_modules
+        volume:
+          nocopy: true
+      - type: volume
+        source: nuxt
+        target: /nuxt
+        volume:
+          nocopy: true
     ports:
       - "3000:3000"
     environment:
       HOST: 0.0.0.0
+
+volumes:
+  node_modules:
+  nuxt:

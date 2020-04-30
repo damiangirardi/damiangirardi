@@ -1,5 +1,6 @@
 export default {
   mode: 'universal',
+  buildDir: '/nuxt/.nuxt',
   /*
    ** Headers of the page
    */
