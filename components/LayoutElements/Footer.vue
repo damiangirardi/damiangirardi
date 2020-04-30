@@ -5,14 +5,25 @@
 				<div class="col-md-6 col-12 breadcrumb-footer">
 					<a href="#!" class="text-uppercase">PROYECTO</a>
 					<a href="#!" class="text-uppercase" v-if="typeof proyectName !== 'indefined'">{{proyectName}}</a>
-					<a href="#!" class="text-uppercase" v-if="typeof birdName !== 'undefined'">{{birdName}}</a>
+					<!-- <a href="#!" class="text-uppercase" v-if="isBirdView">{{proyectName}}</a> -->
 				</div>
-				<div v-if="typeof birdName !== 'undefined'" class="col-md-6 col-12 data-footer">
+				<div v-if="isBirdView" class="col-md-6 col-12 data-footer">
 					<div class="row no-gutters">
 						<div class="col-8">
 							<div class="apto">
 								<div class="apto-box">
-									<a href="#!" v-b-tooltip.hover.top title="+ Información" @click.prevent="toggleAptoinfo()">APTO. 3A</a>
+									<template v-if="!toggleBirdAction">
+										<a href="#!" @click.prevent="goBirdView()">{{proyectName}} arriba</a>
+									</template>
+									<template v-else>
+										<a href="#!" @click.prevent="outBirdView()">{{proyectName}} abajo</a>
+									</template>
+								</div>
+
+								<!-- <span class="divisor"></span>
+
+								<div class="apto-box">
+									<a href="#!" v-b-tooltip.hover.top title="+ Información">APTO. 3A</a>
 									<div class="apto-info" v-show="isAptoInfo">
 										<div class="bot">
 											<ul>
@@ -54,13 +65,7 @@
 											</div>
 										</div>
 									</div>
-								</div>
-
-								<span class="divisor"></span>
-
-								<div class="apto-box">
-									<a href="#!">APTO. 3A</a>
-								</div>
+								</div> -->
 							</div>
 						</div>
 						<div class="col-2 offset-2">
@@ -93,8 +98,14 @@
 	export default {
 	props:{
 		proyectName: String,
-		birdName: String
-
+		isBirdView: {
+			type: Boolean,
+			default: false
+		},
+		toggleBirdAction:{
+			type: Boolean,
+			default: false
+		}
 	},
     data () {
 		return {
@@ -109,9 +120,11 @@
 		}
   	},
     methods: {
-    	toggleAptoinfo(){
-    		this.isAptoInfo = !this.isAptoInfo
-    		this.$emit('aptoInfoStatus', this.isAptoInfo)
+    	goBirdView(){
+    		this.$emit('goBirdView')
+    	},
+    	outBirdView(){
+    		this.$emit('outBirdView')
     	}
     }
   }
