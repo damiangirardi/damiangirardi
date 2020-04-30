@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+
 // pages
 import Home from '~/pages/index'
 import Masterplan from '~/pages/Masterplan/index'
