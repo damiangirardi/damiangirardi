@@ -35,6 +35,7 @@
     position: absolute;
     display: flex;
     align-items: center;
+    z-index: 1;
     flex-direction: column;
     left: 0;
     top: 50%;

@@ -1,15 +1,21 @@
 <template>
-  <div>
+  <div class="wrap-right">
     <nav>
       <div class="arrow"></div>
       <ul ref="scrollContainer">
         <li v-for="(apto, i) in aptos" :key="i" :class="[{sold: apto.sold, select: apto.image === bgImage}]" 
         @click="toggleImageDepto(apto.image)">
-          {{apto.number}}
+          <div class="link">
+            {{apto.number}}
+          </div>
+         <div class="background">
+           <div class="triangle"></div>
+         </div>
         </li>    
       </ul>
       <div class="arrow bot"></div>
     </nav>
+    <div class="wrap-columnright"></div>
   </div>
 </template>
 
@@ -27,9 +33,6 @@
         bgImage: ''
       }
      },
-     computed: {
-      
-     },
      methods: {
       toggleImageDepto(img){
         this.bgImage = img
@@ -40,24 +43,31 @@
 </script>
 
 <style lang="scss" scoped>
+.wrap-right {
+  width: 90px;
+  height: 100vh;
+  position: relative;
+  float: right;
+  z-index: 1;
+  .wrap-columnright {
+    width: 65px;
+    height: 100vh;
+    padding: 50px 1px;
+    position: absolute;
+    right: 0px;
+    z-index: 1;
+    background-color: #cccccc;
+  }
   nav{
     position: absolute;
     display: flex;
     align-items: center;
     flex-direction: column;
+    z-index: 2;
     right: 0;
-    top: 51.5%;
-    transform: translateY(-50%);
-    width: 65px;
-    height: 84vh;
-    background-color: #cccccc;
-    @media (max-height: 690px){
-      height: 80vh;
-    }
-    @media (max-height: 490px){
-      height: 72vh;
-      top: 52.8%;
-    }
+    height: 89%;
+    top: 3%;
+    width: 69px;
     ul{
       scrollbar-width: none;
       -ms-overflow-style: none;
@@ -73,27 +83,31 @@
         color: #0c0c0c;
         font-size: 14px;
         margin: 5px 0;
+        padding: 3px 2px;
         position: relative;
         cursor: pointer;
         text-align: center;
         transition: background-color .1s ease;
         &.sold{
-          color: #f34423;
-          &:before{
-            content: '';
-            height: 5px;
-            width: 5px;
-            background-color: #f34423;
-            border-radius: 50%;
-            display: inline-block;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            left: 13px;
-          }
+          color: black;
+        }
+        .link {
+          position: relative;
+          color: black;
+          z-index: 3;
         }
         &.select{
-          background-color: rgba(243, 112, 39, .8);
+          /* background-color: rgb(138, 67, 29); */
+          .background {
+            z-index: 3;
+            position: absolute;
+            z-index: 2;
+            width: 80px;
+            height: 100%;
+            top: 0px;
+            background-color: $orange-default;
+            left: -12px;
+          }
         }
         &:hover{
           background-color: rgba(243, 112, 39, .4);
@@ -116,4 +130,5 @@
       }
     }
   }
+}
 </style>

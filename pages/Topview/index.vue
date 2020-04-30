@@ -1,33 +1,27 @@
 <template>
-  <section class="edificio-bg" :style="{ backgroundImage: 'url(' + require('@/assets/images/edificios/' + backgroundUrl + '.jpg') + ')' }">
-
-    <div id="header" v-if="showHeader" key="header">
-      <HeaderComp />
-    </div>
-
+  <section class="edificio-bg">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12">
-          <LeftBar/>
+        <div class="col-md-12 px-0">
+          <LeftBar></LeftBar>
           <RightBar
           :aptos="aptos"
-          @bgImagenDepto="backgroundUrl = $event"
+          @bgImagenDepto="changeImage($event)"
           />
+            <div class="backImage edificio-bg" :style="{ backgroundImage: 'url(' + require('@/assets/images/edificios/' + backgroundUrl + '.jpg') + ')' }">
+            </div>
         </div>
       </div>
     </div>
-
     <div id="fooder" v-if="showFooter" key="footer">
       <FooterComp 
       :proyectName="proyectName" />
     </div>
-
   </section>
 </template>
 
 <script>
   import { mapGetters } from 'vuex'
-  
   import RightBar from '~/components/NavigationBar/RightBar'
   import LeftBar from '~/components/NavigationBar/LeftBar'
   import HeaderComp from '~/components/LayoutElements/Header'
@@ -50,9 +44,17 @@
         proyectName: 'THE VILLAGE'
       }
      },
+     created() {
+        this.$store.dispatch('Topview/getImages')
+     },
+     methods: {
+       changeImage ($event) {
+         this.backgroundUrl = $event;
+       }
+     },
      computed: {
       ...mapGetters({
-        aptos: 'Topview/deptoView',
+        aptos: 'Topview/images',
       })
      },
   }
@@ -63,14 +65,17 @@
   .row{
     height: 100%;
   }
-  .edificio-bg{
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: bottom center;
-    background-image: url(~assets/images/edificios/1011-B5.jpg);
+  .edificio-bg {
     height: 99.9vh;
     width: 100%;
     position: relative;
     transition: background-image .3s ease-in-out .1s;
+  }
+  .backImage {
+    position: absolute;
+    background-size: cover;
+    top: 0px;
+    left: 0px;
+    z-index: 0;
   }
 </style>
