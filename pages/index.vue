@@ -4,7 +4,7 @@
       <div class="container h-100">
         <div class="row justify-content-center align-items-end h-100">
           <div class="col-md-3 col-8 text-center">
-            <router-link :to="{name: 'masterplan'}" class="btn-orange mb-5">EXPLORAR</router-link>
+            <router-link :to="{ name: 'masterplan'}" class="btn-orange mb-5">EXPLORAR</router-link>
           </div>
         </div>
       </div>

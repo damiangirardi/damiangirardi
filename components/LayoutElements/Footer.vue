@@ -4,8 +4,8 @@
 			<div class="row no-gutters">
 				<div class="col-md-6 col-12 breadcrumb-footer">
 					<a href="#!" class="text-uppercase">PROYECTO</a>
-					<a href="#!" class="text-uppercase" v-if="typeof protectName !== 'indefined'">{{proyectName}}</a>
-					<!-- <a href="#!" class="text-uppercase" v-if="isBirdView">{{proyectName}}</a> -->
+					<a href="#!" class="text-uppercase" v-if="typeof proyectName !== 'indefined'">{{proyectName}}</a>
+					<a href="#!" class="text-uppercase" v-if="typeof birdName !== 'undefined'">{{birdName}}</a>
 				</div>
 				<div v-if="isBirdView" class="col-md-6 col-12 data-footer">
 					<div class="row no-gutters">
@@ -156,13 +156,13 @@
 					position: absolute;
 					display: inline-block;
 					width: 0px;
-				    height: 0px;
-				    border-bottom: 22px solid transparent; 
-				    border-top: 22px solid transparent;
-				    border-left: 22px solid $orange-default;
-				    font-size: 0px;
-				    line-height: 0px;
-				    right: -22px;
+          height: 0px;
+          border-bottom: 22px solid transparent; 
+          border-top: 22px solid transparent;
+          border-left: 22px solid $orange-default;
+          font-size: 0px;
+          line-height: 0px;
+          right: -22px;
 					z-index: 1;
 				}
 				&:nth-child(2){
