@@ -5,8 +5,11 @@
       <ul ref="scrollContainer">
         <li v-for="(apto, i) in aptos" :key="i" :class="[{sold: apto.sold, select: apto.image === bgImage}]" 
         @click="toggleImageDepto(apto.image)">
+          <div class="link">
+            {{apto.number}}
+          </div>
          <div class="background">
-           {{apto.number}}
+           <div class="triangle"></div>
          </div>
         </li>    
       </ul>
@@ -30,9 +33,6 @@
         bgImage: ''
       }
      },
-     computed: {
-      
-     },
      methods: {
       toggleImageDepto(img){
         this.bgImage = img
@@ -44,7 +44,7 @@
 
 <style lang="scss" scoped>
 .wrap-right {
-  width: 130px;
+  width: 90px;
   height: 100vh;
   position: relative;
   float: right;
@@ -66,7 +66,7 @@
     z-index: 2;
     right: 0;
     height: 89%;
-    top: 7%;
+    top: 3%;
     width: 69px;
     ul{
       scrollbar-width: none;
@@ -83,35 +83,29 @@
         color: #0c0c0c;
         font-size: 14px;
         margin: 5px 0;
+        padding: 3px 2px;
         position: relative;
         cursor: pointer;
         text-align: center;
         transition: background-color .1s ease;
         &.sold{
           color: black;
-          &:before{
-            content: '';
-            height: 5px;
-            width: 5px;
-            background-color: #f34423;
-            border-radius: 50%;
-            display: inline-block;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            left: 13px;
-          }
+        }
+        .link {
+          position: relative;
+          color: black;
+          z-index: 3;
         }
         &.select{
-          background-color: rgba(243, 112, 39, 1);
+          /* background-color: rgb(138, 67, 29); */
           .background {
             z-index: 3;
             position: absolute;
             z-index: 2;
-            width: 246px;
-            height: 20px;
+            width: 80px;
+            height: 100%;
             top: 0px;
-            background-color: orange;
+            background-color: $orange-default;
             left: -12px;
           }
         }

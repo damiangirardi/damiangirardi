@@ -16,12 +16,12 @@ export const guide = [
         },
         birdView: {
             videoBefore: { 
-                path: 'Cam_03.mp4',
+                path: 'Cam_03_rev.mp4',
                 blob: ''
             },
             image: 'posterVideos/Fot_04_top.jpg',
             videoAfter: { 
-                path: 'Cam_03_rev.mp4', 
+                path: 'Cam_03.mp4', 
                 blob: ''
             },
         }

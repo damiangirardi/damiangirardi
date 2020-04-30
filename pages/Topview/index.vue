@@ -13,26 +13,39 @@
         </div>
       </div>
     </div>
+    <div id="fooder" v-if="showFooter" key="footer">
+      <FooterComp 
+      :proyectName="proyectName" />
+    </div>
   </section>
 </template>
 
 <script>
   import { mapGetters } from 'vuex'
-  
   import RightBar from '~/components/NavigationBar/RightBar'
   import LeftBar from '~/components/NavigationBar/LeftBar'
+  import HeaderComp from '~/components/LayoutElements/Header'
+  import FooterComp from '~/components/LayoutElements/Footer'
 
   export  default {
      name: 'Topview',
-     layout: 'default-with-header-footer',
+     layout: 'main-layout',
      components: {
       RightBar,
-      LeftBar
+      LeftBar,
+      HeaderComp,
+      FooterComp
      },
      data() {
       return {
-        backgroundUrl: '1011-B5'
+        backgroundUrl: '1011-B5',
+        showHeader: true,
+        showFooter: true,
+        proyectName: 'THE VILLAGE'
       }
+     },
+     created() {
+        this.$store.dispatch('Topview/getImages')
      },
      methods: {
        changeImage ($event) {
@@ -41,7 +54,7 @@
      },
      computed: {
       ...mapGetters({
-        aptos: 'Topview/deptoView',
+        aptos: 'Topview/images',
       })
      },
   }
@@ -52,7 +65,7 @@
   .row{
     height: 100%;
   }
-  .edificio-bg{
+  .edificio-bg {
     height: 99.9vh;
     width: 100%;
     position: relative;
@@ -60,6 +73,7 @@
   }
   .backImage {
     position: absolute;
+    background-size: cover;
     top: 0px;
     left: 0px;
     z-index: 0;

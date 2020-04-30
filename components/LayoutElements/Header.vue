@@ -292,7 +292,7 @@
 			width: 80%;
 			position: absolute;
 			left: 0;
-			top: 15px;
+			top: 5px;
 			bottom: 0;
 			display: flex;
 		    flex-direction: column;

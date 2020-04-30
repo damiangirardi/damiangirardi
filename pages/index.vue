@@ -35,11 +35,6 @@ export  default {
         }
         this.$store.dispatch('Proyect/getVideo', obj)
       })
-      // this.$store
-      //   .dispatch('Videos/getVideo', {
-      //     path: 'masterplan/Cam_01.mp4', 
-      //     origin: 'home' }
-      //   )
   },
   methods: {
   }
@@ -55,7 +50,6 @@ export  default {
       background-size: cover;
       background-repeat: no-repeat;
       background-position: bottom center;
-      // background-image: url(~assets/images/home_green_park.jpg);
       height: 100vh;
       width: 100%;
     }
