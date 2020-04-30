@@ -3,10 +3,10 @@
     <nav>
       <div class="arrow"></div>
       <ul ref="scrollContainer">
-        <li v-for="(apto, i) in aptos" :key="i" :class="[{sold: apto.sold, select: apto.image === bgImage}]" 
+        <li v-for="(apto, i) in aptos" :key="i" :class="[{sold: apto.sold, select: apto.image === bgImage}]"
         @click="toggleImageDepto(apto.image)">
           {{apto.number}}
-        </li>    
+        </li>
       </ul>
       <div class="arrow bot"></div>
     </nav>
@@ -28,7 +28,7 @@
       }
      },
      computed: {
-      
+
      },
      methods: {
       toggleImageDepto(img){
@@ -50,6 +50,7 @@
     transform: translateY(-50%);
     width: 65px;
     height: 84vh;
+    z-index: 120;
     background-color: #cccccc;
     @media (max-height: 690px){
       height: 80vh;
@@ -66,8 +67,8 @@
       height: 90%;
       width: 100%;
       overflow-y: scroll;
-      &::-webkit-scrollbar { 
-          display: none; 
+      &::-webkit-scrollbar {
+          display: none;
       }
       li{
         color: #0c0c0c;
