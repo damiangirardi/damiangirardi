@@ -16,7 +16,7 @@ export function	createRouter() {
 			{
 				path: '/',
 				name: 'home',
-				component: Home
+				component: Home,
 			},
 			{
 				path: '/masterplan',

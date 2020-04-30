@@ -4,23 +4,33 @@
       :style="{'background-image': 'url(' + require('assets/images/'+pathImageInit) + ')'}"
       :class="{'active': !videoLoaded }">
     </div>
-    <video muted autoplay :src="pathVideo.path">
-    </video>
+    <video 
+      key="video"
+      autoplay 
+      muted 
+      :src="pathVideo.path" />
   </div>
 </template>
 <script>
-import axios from "axios";
-import {ENV, CURRENT_ENV} from '~/store/environment'
+
 export default {
   data() {
     return {
       videoLoaded: false,
-      interval: null
+      interval: null,
+      timeInterval: 0
     };
   },
   props: {
     pathImageInit: String,
+    playVideo: Boolean,
     pathVideo: Object,
+  },
+  created() {
+    this.timeInterval = 200;
+    if (this.interval) {
+      clearInterval(this.interval)
+    }
   },
   mounted() {
     let video = document.querySelector("video");
@@ -30,13 +40,17 @@ export default {
           this.videoLoaded = true
         }
         let timeVideo = video.duration - video.currentTime;
+        console.log(timeVideo)
         if (timeVideo <= 0.2) {
           this.$emit('finishVideo')
+          console.log('terminamos')
           clearInterval(this.interval);
         }
-      }, 200);
+      }, this.timeInterval);
     });
   },
+  methods: {
+  }
 };
 </script>
 <style lang="scss" scoped>

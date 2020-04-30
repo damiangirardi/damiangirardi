@@ -1,15 +1,18 @@
 <template>
-  <div>
+  <div class="wrap-right">
     <nav>
       <div class="arrow"></div>
       <ul ref="scrollContainer">
         <li v-for="(apto, i) in aptos" :key="i" :class="[{sold: apto.sold, select: apto.image === bgImage}]" 
         @click="toggleImageDepto(apto.image)">
-          {{apto.number}}
+         <div class="background">
+           {{apto.number}}
+         </div>
         </li>    
       </ul>
       <div class="arrow bot"></div>
     </nav>
+    <div class="wrap-columnright"></div>
   </div>
 </template>
 
@@ -40,24 +43,31 @@
 </script>
 
 <style lang="scss" scoped>
+.wrap-right {
+  width: 130px;
+  height: 100vh;
+  position: relative;
+  float: right;
+  z-index: 1;
+  .wrap-columnright {
+    width: 65px;
+    height: 100vh;
+    padding: 50px 1px;
+    position: absolute;
+    right: 0px;
+    z-index: 1;
+    background-color: #cccccc;
+  }
   nav{
     position: absolute;
     display: flex;
     align-items: center;
     flex-direction: column;
+    z-index: 2;
     right: 0;
-    top: 51.5%;
-    transform: translateY(-50%);
-    width: 65px;
-    height: 84vh;
-    background-color: #cccccc;
-    @media (max-height: 690px){
-      height: 80vh;
-    }
-    @media (max-height: 490px){
-      height: 72vh;
-      top: 52.8%;
-    }
+    height: 89%;
+    top: 7%;
+    width: 69px;
     ul{
       scrollbar-width: none;
       -ms-overflow-style: none;
@@ -78,7 +88,7 @@
         text-align: center;
         transition: background-color .1s ease;
         &.sold{
-          color: #f34423;
+          color: black;
           &:before{
             content: '';
             height: 5px;
@@ -93,7 +103,17 @@
           }
         }
         &.select{
-          background-color: rgba(243, 112, 39, .8);
+          background-color: rgba(243, 112, 39, 1);
+          .background {
+            z-index: 3;
+            position: absolute;
+            z-index: 2;
+            width: 246px;
+            height: 20px;
+            top: 0px;
+            background-color: orange;
+            left: -12px;
+          }
         }
         &:hover{
           background-color: rgba(243, 112, 39, .4);
@@ -116,4 +136,5 @@
       }
     }
   }
+}
 </style>

@@ -116,11 +116,11 @@
 <style lang="scss" scoped>
 	footer{
 		background-color: #dedede;
-		position: absolute;
+		position: fixed;
 		bottom: 0;
-		width: 100%;
 		left: 0;
-		right: 0;
+		width: 100%;
+		z-index: 9;
 		.breadcrumb-footer{
 			display: flex;
 			align-items: center;

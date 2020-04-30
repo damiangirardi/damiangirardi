@@ -1,4 +1,5 @@
-const state = {
+const state = () => {
     videos: []
 }
+
 export default state
