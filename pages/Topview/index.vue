@@ -6,9 +6,10 @@
           <LeftBar></LeftBar>
           <RightBar
           :aptos="aptos"
+          :selected="imgSelected"
           @bgImagenDepto="changeImage($event)"
           />
-            <div class="backImage edificio-bg" :style="{ backgroundImage: 'url(' + require('@/assets/images/edificios/' + backgroundUrl + '.jpg') + ')' }">
+            <div class="backImage edificio-bg" :style="{ backgroundImage: 'url(' + require('@/assets/images/edificios/' + imgSelected + '.jpg') + ')' }">
             </div>
         </div>
       </div>
@@ -38,24 +39,25 @@
      },
      data() {
       return {
-        backgroundUrl: '1011-B5',
         showHeader: true,
+        imgSelected: '',
         showFooter: true,
         proyectName: 'THE VILLAGE'
       }
      },
-     created() {
-        this.$store.dispatch('Topview/getImages')
-     },
-     methods: {
-       changeImage ($event) {
-         this.backgroundUrl = $event;
-       }
-     },
-     computed: {
+      computed: {
       ...mapGetters({
         aptos: 'Topview/images',
       })
+      },
+     created() {
+        this.$store.dispatch('Topview/getImages')
+        this.imgSelected = this.aptos[0].image
+     },
+     methods: {
+       changeImage ($event) {
+         this.imgSelected = $event;
+       }
      },
   }
 </script>
