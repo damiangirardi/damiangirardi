@@ -17,7 +17,7 @@
     <!-- IMAGEN FINAL END -->
 
     <!-- SPIN -->
-    <div class="spin" v-if="showSpin" :class="{active: animateSpin}">
+    <div class="spin" v-if="showSpin && !birdView" :class="{active: animateSpin}">
       <div>
         <button @click.prevent="goBack()" class="btn btn-back"><img src="~assets/images/icons/prev.svg"></button>
       </div>
@@ -45,7 +45,11 @@
     <transition-group key="initialFooter" name="fade">
       <div id="fooder" v-if="showFooter" key="footer">
         <FooterComp 
-        :proyectName="proyectName" />
+        :proyectName="proyectName"
+        :isBirdView="isBirdView"
+        :toggleBirdAction="birdView"
+        @goBirdView="goTop()"
+        @outBirdView="goBot()"/>
       </div>
     </transition-group>
 
@@ -114,7 +118,11 @@ export  default {
     ...mapGetters({
       initialStep: 'Proyect/initialStep',
       guide: 'Proyect/guide'
-    })
+    }),
+    isBirdView(){
+      return typeof this.guide[this.indice].birdView !== 'undefined'
+    }
+
   },
 
   created () {
@@ -184,10 +192,7 @@ export  default {
       if (!this.birdView){
         return this.guide[this.indice].image
       }else {
-        return this.guide[this.indice].image
-        setTimeout(() => {
-          return this.guide[this.indice].birdView.image
-        }, 200)
+        return this.guide[this.indice].birdView.image    
       }
     },
     goNext() {
@@ -211,23 +216,24 @@ export  default {
       }, 800)
     },
     goTop() {
-      this.birdView = true
-      this.searchVideo('after')
+      this.searchVideo('after', true)
       setTimeout(() => {
-         this.showNextImage = true 
+        this.birdView = true
       }, 800)
+            
     },
      goBot() {
-      this.birdView = false
-      this.searchVideo('before')
+      this.searchVideo('before', true)
+      setTimeout(() => {
+        this.birdView = false
+      }, 800)
     },
-    searchVideo(type) {
+    searchVideo(type, birdView = false) {
       let route = type === 'after' ? 'videoAfter' : 'videoBefore'
       let path
-      if (this.birdView) {
+      if (birdView) {
         path = this.guide[Number(this.indice)].birdView[route].path
       } else {
-
         path = this.guide[Number(this.indice)][route].path
       }
       let res = _.find(this.videosBlob, video => {
