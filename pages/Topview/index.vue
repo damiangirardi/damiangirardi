@@ -3,8 +3,7 @@
     <section class="build-container">
       <div class="back-container">
         <img class="edificio-bg" :src="require('@/assets/images/edificios/' + backgroundUrl + '.jpg')" />
-<!--        <img :src="require('@/assets/images/edificios/1011-B4-A-highlighted-raw.png')" />-->
-        <highlighted-unit src="images/edificios/1011-B4-A-highlighted.png" href="clicked" />
+        <highlighted-unit src="images/edificios/1011-B4-A-highlighted.png" routeName="masterplan" />
       </div>
 
       <div id="header" v-if="showHeader" key="header">

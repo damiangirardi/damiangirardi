@@ -6,11 +6,13 @@
   export default {
     name: "highlightedUnit",
     props: {
+      // Source of the image inside the assets directory
       src: {
         type: String,
         required: true
       },
-      href: {
+      // Route name to go when click on the highlighted area
+      routeName: {
         type: String,
         required: true
       }
@@ -19,14 +21,14 @@
       return {
         ctx: '',
         target: ''
-      };
+      }
     },
     mounted() {
       this.ctx = document.createElement("canvas").getContext("2d");
       this.target = document.getElementById('target');
 
-      document.getElementById("target").onmousedown = this.detectClickHighlighted;
-      document.getElementById("target").onmousemove = this.putCursorPointerHighlighted;
+      this.target.onmousedown = this.detectClickHighlighted;
+      this.target.onmousemove = this.putCursorPointerHighlighted;
     },
     methods: {
       detectClickHighlighted: function (mouseEvent) {
@@ -34,8 +36,7 @@
 
         // If pixel is transparent, go to the target URL
         if (alpha === 0) {
-          // that.$router.push('/clicked')
-          alert('clicked on the target')
+          this.$router.push(this.routeName)
         } else {
           console.log(`not clicked on the target. Alpha: ${alpha}`);
         }
