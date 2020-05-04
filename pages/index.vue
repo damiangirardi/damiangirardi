@@ -1,27 +1,44 @@
 <template>
-  <div id="home">
-    <section class="bg-green_park">
+  <div id="home" v-if="!loading">
+    <section class="bg-green_park" :style="{backgroundImage: 'url(' + require('@/assets/images/' + initialStep.image) + ')'}">
       <div class="container h-100">
         <div class="row justify-content-center align-items-end h-100">
-          <div class="col-3 text-center">
-            <router-link :to="{name: 'masterplan'}" class="btn-orange mb-5">Explorar</router-link>
+          <div class="col-md-3 col-8 text-center">
+            <router-link :to="{ name: 'masterplan'}" class="btn-orange mb-5">EXPLORAR</router-link>
           </div>
         </div>
       </div>
     </section>
   </div>
 </template>
-
 <script>
-  export  default {
-     name: 'Home',
-
-     data() {
-      return {
-
-      }
-     }
+import { mapGetters } from 'vuex';
+export  default {
+  name: 'home',
+  layout: 'main-layout',
+  data() {
+    return {
+      loading: true
+    }
+  },
+  computed: {
+    ...mapGetters({
+      initialStep: 'Proyect/initialStep'
+    })
+  },
+  created () {
+    this.$store.dispatch('Proyect/startApp')
+      .then(() => {
+        this.loading = false
+        let obj = {
+          path: this.initialStep.video
+        }
+        this.$store.dispatch('Proyect/getVideo', obj)
+      })
+  },
+  methods: {
   }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -33,7 +50,6 @@
       background-size: cover;
       background-repeat: no-repeat;
       background-position: bottom center;
-      background-image: url(~assets/images/home_green_park.jpg);
       height: 100vh;
       width: 100%;
     }
@@ -44,7 +60,10 @@
       display: inline-block;
       width: 185px;
       color: #fff;
-      background-color: #f36f21;
+      background-color: $orange-default;
+      &:hover {
+        text-decoration: none;;
+      }
     }
   }
 </style>
