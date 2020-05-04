@@ -4,7 +4,7 @@
       <div class="arrow center-nav"></div>
       <ul ref="scrollContainer">
         <li v-for="(apto, i) in aptos" :key="i" :class="[{sold: apto.sold, select: apto.image === bgImage.path}]" 
-        @click="toggleImageDepto(apto.image)">
+        @click="toggleImageDepto(apto)">
           <div class="link center-nav">
             {{apto.number}}
           </div>
@@ -38,9 +38,9 @@
       }
      },
      methods: {
-      toggleImageDepto(img){
-        this.bgImage.path = img
-        this.$emit('bgImagenDepto', this.bgImage.path)
+      toggleImageDepto(path){
+        this.bgImage.path = path.image
+        this.$emit('bgImagenDepto', path)
       }
      }
   }

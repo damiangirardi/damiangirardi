@@ -8,17 +8,19 @@
         <div class="col-md-12 px-0">
           <LeftBar></LeftBar>
           <RightBar
-          :aptos="aptos"
-          :selected="imgSelected"
+          :aptos="floor"
+          :selected="florSelected.image"
           @bgImagenDepto="changeImage($event)"
           />
-            <div class="backImage edificio-bg" :style="{ backgroundImage: 'url(' + require('@/assets/images/edificios/' + imgSelected + '.jpg') + ')' }">
+            <div class="backImage edificio-bg" :style="{ backgroundImage: 'url(' + require('@/assets/images/edificios/' + florSelected.image + '.jpg') + ')' }">
             </div>
         </div>
       </div>
     </div>
     <div id="fooder" v-if="showFooter" key="footer">
-      <FooterComp 
+      <FooterComp
+      :showButtons="true"
+      :buttonFooter="buttonsList"
       :proyectName="proyectName" />
     </div>
   </div>
@@ -43,24 +45,27 @@
      data() {
       return {
         showHeader: true,
-        imgSelected: '',
+        florSelected: null,
+        buttonsList: null,
         showFooter: true,
         proyectName: 'THE VILLAGE'
       }
      },
       computed: {
       ...mapGetters({
-        aptos: 'Topview/images',
+        floor: 'Topview/images',
       })
       },
      created() {
         this.$store.dispatch('Topview/getImages')
-        this.imgSelected = this.aptos[0].image
+        this.florSelected = this.floor[0]
+        this.buttonsList = this.floor[0].apto
      },
      methods: {
-       changeImage ($event) {
-         this.imgSelected = $event;
-       }
+       changeImage (event) {
+         this.florSelected = event;
+         this.buttonsList = event.apto
+       },
      },
   }
 </script>

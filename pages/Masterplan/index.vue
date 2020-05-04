@@ -46,10 +46,10 @@
       <div id="fooder" v-if="showFooter" key="footer">
         <FooterComp 
         :proyectName="proyectName"
-        :isBirdView="isBirdView"
+        :showButtons="isBirdView"
         :toggleBirdAction="birdView"
-        @goBirdView="goTop()"
-        @outBirdView="goBot()"/>
+        :buttonFooter="getButtonFooter()"
+        @clickButton="runBirdView($event)" />
       </div>
     </transition-group>
 
@@ -195,6 +195,13 @@ export  default {
         return this.guide[this.indice].birdView.image    
       }
     },
+    getButtonFooter () {
+      return [{
+        status: this.birdView,
+        action: this.birdView ? 'before' : 'after',
+        text: this.birdView ? this.proyectName + ' Abajo' : this.proyectName + ' Arriba'
+      }]
+    },
     goNext() {
       this.searchVideo('after')
       setTimeout(() => {
@@ -215,17 +222,10 @@ export  default {
         }
       }, 800)
     },
-    goTop() {
-      this.searchVideo('after', true)
+    runBirdView (objBirdView) {
+      this.searchVideo(objBirdView.action, true)
       setTimeout(() => {
-        this.birdView = true
-      }, 800)
-            
-    },
-     goBot() {
-      this.searchVideo('before', true)
-      setTimeout(() => {
-        this.birdView = false
+        this.birdView = objBirdView.action === 'after'
       }, 800)
     },
     searchVideo(type, birdView = false) {

@@ -5,23 +5,16 @@
 				<div class="col-md-6 col-12 breadcrumb-footer">
 					<a href="#!" class="text-uppercase">PROYECTO</a>
 					<a href="#!" class="text-uppercase" v-if="typeof proyectName !== 'indefined'">{{proyectName}}</a>
-					<!-- <a href="#!" class="text-uppercase" v-if="isBirdView">{{proyectName}}</a> -->
+					<!-- <a href="#!" class="text-uppercase" v-if="showButtons">{{proyectName}}</a> -->
 				</div>
-				<div v-if="isBirdView" class="col-md-6 col-12 data-footer">
+				<div v-if="showButtons" class="col-md-6 col-12 data-footer">
 					<div class="row no-gutters">
 						<div class="col-8">
 							<div class="apto">
-								<div class="apto-box">
-									<template v-if="!toggleBirdAction">
-										<a href="#!" @click.prevent="goBirdView()">{{proyectName}} arriba</a>
-									</template>
-									<template v-else>
-										<a href="#!" @click.prevent="outBirdView()">{{proyectName}} abajo</a>
-									</template>
+								<div class="apto-box" v-for="(button, i) in buttonFooter" :key="i">
+									<a href="#!" @click.prevent="clickButton(button)">{{button.text}}</a>
 								</div>
-
 								<!-- <span class="divisor"></span>
-
 								<div class="apto-box">
 									<a href="#!" v-b-tooltip.hover.top title="+ Información">APTO. 3A</a>
 									<div class="apto-info" v-show="isAptoInfo">
@@ -97,8 +90,14 @@
 <script>
 	export default {
 	props:{
-		proyectName: String,
-		isBirdView: {
+    proyectName: String,
+    buttonFooter: {
+      type: Array,
+      default: [{
+        text: ''
+      }]
+    },
+		showButtons: {
 			type: Boolean,
 			default: false
 		},
@@ -113,19 +112,16 @@
 		}
     },
     watch: {
-    $route(to, from) {
-		if (this.isAptoInfo) {
-				this.toggleAptoinfo()
-			}
-		}
+      $route(to, from) {
+      if (this.isAptoInfo) {
+          this.toggleAptoinfo()
+        }
+      }
   	},
     methods: {
-    	goBirdView(){
-    		this.$emit('goBirdView')
-    	},
-    	outBirdView(){
-    		this.$emit('outBirdView')
-    	}
+      clickButton (event) {
+        this.$emit('clickButton', event);
+      }
     }
   }
 </script>
