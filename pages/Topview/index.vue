@@ -9,10 +9,10 @@
           <LeftBar></LeftBar>
           <RightBar
           :aptos="floor"
-          :selected="florSelected.image"
+          :selected="imageSelected"
           @bgImagenDepto="changeImage($event)"
           />
-            <div class="backImage edificio-bg" :style="{ backgroundImage: 'url(' + require('@/assets/images/edificios/' + florSelected.image + '.jpg') + ')' }">
+            <div class="backImage edificio-bg" :style="{ backgroundImage: 'url(' + require('@/assets/images/edificios/' + imageSelected + '.jpg') + ')' }">
             </div>
         </div>
       </div>
@@ -21,6 +21,7 @@
       <FooterComp
       :showButtons="true"
       :buttonFooter="buttonsList"
+      @clickButton="updateBackground($event)"
       :proyectName="proyectName" />
     </div>
   </div>
@@ -47,6 +48,7 @@
         showHeader: true,
         florSelected: null,
         buttonsList: null,
+        imageSelected: '',
         showFooter: true,
         proyectName: 'THE VILLAGE'
       }
@@ -60,12 +62,17 @@
         this.$store.dispatch('Topview/getImages')
         this.florSelected = this.floor[0]
         this.buttonsList = this.floor[0].apto
+        this.imageSelected = this.floor[0].image
      },
      methods: {
        changeImage (event) {
          this.florSelected = event;
+         this.imageSelected = event.image
          this.buttonsList = event.apto
        },
+      updateBackground (event) {
+        this.imageSelected = event.image
+      }
      },
   }
 </script>
