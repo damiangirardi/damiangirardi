@@ -27,8 +27,7 @@
      props:{
       aptos: Array,
       required: true,
-      selected: String,
-      default: () => {}
+      selected: String
      },
      data() {
       return {
