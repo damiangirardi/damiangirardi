@@ -17,7 +17,7 @@
     </div>
     
     <!-- background highligh image -->
-    <highlighted-unit src="images/edificios/1011-B4-A-highlighted.png" routeName="masterplan" />
+    <highlighted-unit v-if="isHighlighted && buttonsList" src="images/edificios/1011-B4-A-highlighted.png" routeName="project-details/edificio-1011" />
 
 
     <div id="fooder" v-if="showFooter" key="footer">
