@@ -3,17 +3,17 @@
     <div id="header">
       <HeaderComp />
     </div>
-
     <LeftBar
       :options="options"
       @bgImagenDepto="changeImage($event)"
     ></LeftBar>
-
-    <div class="backImage edificio-bg" :style="{ backgroundImage: 'url(' + require('@/assets/images/opciones/' + imgSelected ) + ')' }"></div>
-
+    <div class="backImage edificio-bg" 
+      :style="{ backgroundImage: 'url(' + require('@/assets/images/opciones/' + imgSelected ) + ')' }">
+    </div>
     <div id="fooder" v-if="showFooter" key="footer">
       <FooterComp
       :option="options"
+      :showButtons="true"
       :proyectName="proyectName" />
     </div>
   </div>
@@ -47,6 +47,7 @@
       })
       },
      created() {
+        console.log(this.$route);
         this.$store.dispatch('Options/getImages')
         this.imgSelected = this.options.planta ? this.options.planta : this.options.dimensiones
      },

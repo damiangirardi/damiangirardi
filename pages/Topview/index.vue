@@ -33,7 +33,6 @@
 
 <script>
   import { mapGetters } from 'vuex'
-
   import RightBar from '~/components/NavigationBar/RightBar'
   import HeaderComp from '~/components/LayoutElements/Header'
   import FooterComp from '~/components/LayoutElements/Footer'
@@ -51,7 +50,7 @@
      data() {
       return {
         showHeader: true,
-        florSelected: null,
+        floorSelected: {},
         buttonsList: null,
         imageSelected: '',
         showFooter: true,
@@ -64,22 +63,25 @@
           topview: 'Topview/images',
         }),
         isHighlighted(){
-          return typeof this.florSelected.highlighted !== 'undefined'
+          return typeof this.floorSelected.highlighted !== 'undefined'
         }
       },
      created() {
         this.$store.dispatch('Topview/getImages')
-        this.florSelected = this.topview[0].number
+        this.floorSelected = this.topview[0]
         this.imageSelected = this.topview[0].image
+        this.$store.dispatch('Proyect/setFloor', this.floorSelected)
      },
      methods: {
        changeImage (event) {
-         this.florSelected = event
+         this.floorSelected = event
          this.imageSelected = event.image
          this.buttonsList = event.highlighted
+         this.$store.dispatch('Proyect/setFloor', event)
        },
       updateBackground (event) {
         this.imageSelected = event.image
+        /* this.$store.dispatch('Proyect/setProyectDetail', event) */
       }
     }
   }

@@ -4,7 +4,7 @@ export const deptoView = [
         type: 'Edificio', 
         number: '04', 
         sold: true, 
-        image: '1011-B5.jpg',
+        image: '1011-5.jpg',
       },
       {
         name: '1011', 

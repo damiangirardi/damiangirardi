@@ -36,5 +36,9 @@ export default {
         }).catch((error) => {
             console.log(error);
         })
-    }
+    },
+    setFloor ({commit}, data) {
+        commit('storeFloor', data)
+        return data;
+    } 
 }

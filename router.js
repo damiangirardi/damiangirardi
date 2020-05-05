@@ -31,8 +31,8 @@ export function createRouter() {
       {
         path: '/project-details/:permalink',
         name: 'projectdetails',
-        component: ProjectDetails
-      }
+        component: ProjectDetails,
+      },
     ],
   })
 

@@ -5,6 +5,12 @@
 				<div class="col-md-6 col-12 breadcrumb-footer">
 					<a href="#!" class="text-uppercase">PROYECTO</a>
 					<a href="#!" class="text-uppercase" v-if="typeof proyectName !== 'indefined'">{{proyectName}}</a>
+          <a href="#!" > 
+            {{ floorLoaded.number }}
+          </a>
+          <a href="#!" v-if="$route.name == 'projectdetails'" > 
+            {{ $route.params.permalink }}
+          </a>
 					<!-- <a href="#!" class="text-uppercase" v-if="showButtons">{{proyectName}}</a> -->
 				</div>
 				<div class="col-md-6 col-12 data-footer">
@@ -17,7 +23,6 @@
 									<div class="more">
 										<svg viewBox="0 0 426.66667 426.66667" xmlns="http://www.w3.org/2000/svg"><path fill="#7b7b7b" d="m405.332031 192h-170.664062v-170.667969c0-11.773437-9.558594-21.332031-21.335938-21.332031-11.773437 0-21.332031 9.558594-21.332031 21.332031v170.667969h-170.667969c-11.773437 0-21.332031 9.558594-21.332031 21.332031 0 11.777344 9.558594 21.335938 21.332031 21.335938h170.667969v170.664062c0 11.777344 9.558594 21.335938 21.332031 21.335938 11.777344 0 21.335938-9.558594 21.335938-21.335938v-170.664062h170.664062c11.777344 0 21.335938-9.558594 21.335938-21.335938 0-11.773437-9.558594-21.332031-21.335938-21.332031zm0 0"/></svg>
 									</div>
-
 									<div class="apto-info" v-show="isAptoInfo">
 										<div class="bot">
 											<ul>
@@ -75,8 +80,8 @@
 							</div>
 
 							<!-- TOPVIEW -->
-							<div class="apto" v-if="$route.name == 'topview'">
-								<div v-if="showButtons" class="apto-box" v-for="(button, i) in buttonFooter" :key="i">
+							<div class="apto" v-if="$route.name == 'topview' && showButtons">
+								<div class="apto-box" v-for="(button, i) in buttonFooter" :key="i">
 									<a href="#!" @click.prevent="clickButton(button)">{{button.name}}</a>
 								</div>
 							</div>
@@ -109,6 +114,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 	export default {
 	props:{
 	    proyectName: String,
@@ -126,9 +132,14 @@
 		}
 	},
     data () {
-		return {
-			isAptoInfo: false,
-		}
+      return {
+        isAptoInfo: false,
+      }
+    },
+    computed: {
+      ...mapGetters({
+        floorLoaded: 'Proyect/floor',
+      })
     },
     watch: {
       $route(to, from) {
@@ -142,11 +153,11 @@
         this.$emit('clickButton', event);
       },
       goBirdView(){
-			this.$emit('goBirdView')
-		},
-		outBirdView(){
-			this.$emit('outBirdView')
-		}
+        this.$emit('goBirdView')
+      },
+      outBirdView(){
+        this.$emit('outBirdView')
+      }
     }
   }
 </script>
@@ -217,13 +228,13 @@
 						position: absolute;
 						display: inline-block;
 						width: 0px;
-					    height: 0px;
-					    border-bottom: 22px solid transparent; 
-					    border-top: 22px solid transparent;
-					    border-left: 22px solid rgba(123, 123, 123, .5);
-					    font-size: 0px;
-					    line-height: 0px;
-					    right: -22px;
+            height: 0px;
+            border-bottom: 22px solid transparent; 
+            border-top: 22px solid transparent;
+            border-left: 22px solid rgba(123, 123, 123, .5);
+            font-size: 0px;
+            line-height: 0px;
+            right: -22px;
 						z-index: 1;
 						@media (max-width: 767px){
 							display: none;

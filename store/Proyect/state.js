@@ -1,4 +1,5 @@
 export default () => ({
     initialStep: {},
-    guide: []
+    guide: [],
+    floor: {},
 })
