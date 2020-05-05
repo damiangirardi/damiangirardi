@@ -73,6 +73,8 @@
   .backImage {
     position: absolute;
     background-size: cover;
+    background-position: 0px;
+    background-repeat: no-repeat;
     top: 0px;
     left: 0px;
     z-index: 0;

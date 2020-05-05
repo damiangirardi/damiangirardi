@@ -81,7 +81,6 @@
        },
       updateBackground (event) {
         this.imageSelected = event.image
-        /* this.$store.dispatch('Proyect/setProyectDetail', event) */
       }
     }
   }
