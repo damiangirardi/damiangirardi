@@ -1,0 +1,8 @@
+layouts/
+store/
+components/
+pages/
+plugins/
+proyecto/
+servermiddleware/
+.gitignore
