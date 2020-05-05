@@ -69,7 +69,10 @@
 <style scoped>
 img {
   position: absolute;
-  height: 99.9vh;
+  height: 100vh;
+  width: 100%;
+  object-position: center;
+  object-fit: cover;
   z-index: 2;
 }
 </style>
