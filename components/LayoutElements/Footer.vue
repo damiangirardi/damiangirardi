@@ -5,25 +5,19 @@
 				<div class="col-md-6 col-12 breadcrumb-footer">
 					<a href="#!" class="text-uppercase">PROYECTO</a>
 					<a href="#!" class="text-uppercase" v-if="typeof proyectName !== 'indefined'">{{proyectName}}</a>
-					<a href="#!" class="text-uppercase" v-if="typeof birdName !== 'undefined'">{{birdName}}</a>
+					<!-- <a href="#!" class="text-uppercase" v-if="showButtons">{{proyectName}}</a> -->
 				</div>
-				<div v-if="isBirdView" class="col-md-6 col-12 data-footer">
+				<div class="col-md-6 col-12 data-footer">
 					<div class="row no-gutters">
 						<div class="col-8">
-							<div class="apto">
+							
+							<!-- PROJECT DETAILS -->
+							<div class="apto" v-if="$route.name == 'projectdetails'">
 								<div class="apto-box">
-									<template v-if="!toggleBirdAction">
-										<a href="#!" @click.prevent="goBirdView()">{{proyectName}} arriba</a>
-									</template>
-									<template v-else>
-										<a href="#!" @click.prevent="outBirdView()">{{proyectName}} abajo</a>
-									</template>
-								</div>
+									<div class="more">
+										<svg viewBox="0 0 426.66667 426.66667" xmlns="http://www.w3.org/2000/svg"><path fill="#7b7b7b" d="m405.332031 192h-170.664062v-170.667969c0-11.773437-9.558594-21.332031-21.335938-21.332031-11.773437 0-21.332031 9.558594-21.332031 21.332031v170.667969h-170.667969c-11.773437 0-21.332031 9.558594-21.332031 21.332031 0 11.777344 9.558594 21.335938 21.332031 21.335938h170.667969v170.664062c0 11.777344 9.558594 21.335938 21.332031 21.335938 11.777344 0 21.335938-9.558594 21.335938-21.335938v-170.664062h170.664062c11.777344 0 21.335938-9.558594 21.335938-21.335938 0-11.773437-9.558594-21.332031-21.335938-21.332031zm0 0"/></svg>
+									</div>
 
-								<!-- <span class="divisor"></span>
-
-								<div class="apto-box">
-									<a href="#!" v-b-tooltip.hover.top title="+ Información">APTO. 3A</a>
 									<div class="apto-info" v-show="isAptoInfo">
 										<div class="bot">
 											<ul>
@@ -65,8 +59,28 @@
 											</div>
 										</div>
 									</div>
-								</div> -->
+								</div>
 							</div>
+
+							<!-- MASTERPLAN -->
+							<div class="apto" v-if="$route.name == 'masterplan'">
+								<div class="apto-box" v-if="showButtons">
+									<template v-if="!toggleBirdAction">
+										<a href="#!" @click.prevent="goBirdView()">{{proyectName}} arriba</a>
+									</template>
+									<template v-else>
+										<a href="#!" @click.prevent="outBirdView()">{{proyectName}} abajo</a>
+									</template>
+								</div>
+							</div>
+
+							<!-- TOPVIEW -->
+							<div class="apto" v-if="$route.name == 'topview'">
+								<div v-if="showButtons" class="apto-box" v-for="(button, i) in buttonFooter" :key="i">
+									<a href="#!" @click.prevent="clickButton(button)">{{button.name}}</a>
+								</div>
+							</div>
+							
 						</div>
 						<div class="col-2 offset-2">
 							<div class="back">
@@ -97,8 +111,12 @@
 <script>
 	export default {
 	props:{
-		proyectName: String,
-		isBirdView: {
+	    proyectName: String,
+	    buttonFooter: {
+	      type: Array,
+	      default: () => {}
+	    },
+		showButtons: {
 			type: Boolean,
 			default: false
 		},
@@ -113,19 +131,22 @@
 		}
     },
     watch: {
-    $route(to, from) {
-		if (this.isAptoInfo) {
-				this.toggleAptoinfo()
-			}
-		}
+      $route(to, from) {
+      if (this.isAptoInfo) {
+          this.toggleAptoinfo()
+        }
+      }
   	},
     methods: {
-    	goBirdView(){
-    		this.$emit('goBirdView')
-    	},
-    	outBirdView(){
-    		this.$emit('outBirdView')
-    	}
+      clickButton (event) {
+        this.$emit('clickButton', event);
+      },
+      goBirdView(){
+			this.$emit('goBirdView')
+		},
+		outBirdView(){
+			this.$emit('outBirdView')
+		}
     }
   }
 </script>
@@ -225,6 +246,9 @@
 				.apto-box{
 					position: relative;
 					width: 50%;
+					&:not(:last-child){
+						border-right: 1px solid #7b7b7b;
+					}
 					a{
 						color: #7b7b7b;
 						font-weight: 600;
@@ -285,6 +309,28 @@
 									font-size: 14px;
 								}
 							}
+						}
+					}
+					.more{
+						width: 30px;
+						height: 30px;
+						border-radius: 50%;
+						border: 2px solid #7b7b7b;
+						cursor: pointer;
+						color: #7b7b7b;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						&:hover{
+							border-color: $orange-default;
+							svg{
+								path{
+									fill: $orange-default;
+								}
+							}
+						}
+						svg{
+							width: 13px;
 						}
 					}
 				}
