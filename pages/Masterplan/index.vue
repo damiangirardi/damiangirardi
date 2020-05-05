@@ -46,7 +46,7 @@
       <div id="fooder" v-if="showFooter" key="footer">
         <FooterComp 
         :proyectName="proyectName"
-        :isBirdView="isBirdView"
+        :showButtons="isBirdView"
         :toggleBirdAction="birdView"
         @goBirdView="goTop()"
         @outBirdView="goBot()"/>
