@@ -81,7 +81,7 @@
     position: absolute;
     display: flex;
     align-items: center;
-    z-index: 1;
+    z-index: 10;
     flex-direction: column;
     left: 0;
     top: 50%;

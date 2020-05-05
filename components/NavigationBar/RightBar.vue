@@ -12,7 +12,7 @@
            <div class="square"></div>
            <div class="triangle"></div>
          </div>
-        </li>    
+        </li>
       </ul>
       <div class="arrow center-nav bot"></div>
     </nav>
@@ -52,7 +52,7 @@
     height: 100vh;
     position: relative;
     float: right;
-    z-index: 1;
+    z-index: 10;
     display: flex;
   .wrap-columnright {
     width: 65px;
@@ -81,8 +81,8 @@
       height: 90%;
       width: 100%;
       overflow-y: scroll;
-      &::-webkit-scrollbar { 
-          display: none; 
+      &::-webkit-scrollbar {
+          display: none;
       }
       li{
         color: #0c0c0c;

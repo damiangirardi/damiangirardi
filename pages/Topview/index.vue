@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div id="header">
+
+    <div id="header" v-if="showHeader" key="header">
       <HeaderComp />
     </div>
   
@@ -14,6 +15,9 @@
     <!-- background image -->
     <div class="backImage edificio-bg" :style="{ backgroundImage: 'url(' + require('@/assets/images/edificios/' + imageSelected ) + ')' }">
     </div>
+    
+    <!-- background highligh image -->
+    <highlighted-unit src="images/edificios/1011-B4-A-highlighted.png" routeName="masterplan" />
 
 
     <div id="fooder" v-if="showFooter" key="footer">
@@ -29,14 +33,17 @@
 
 <script>
   import { mapGetters } from 'vuex'
+
   import RightBar from '~/components/NavigationBar/RightBar'
   import HeaderComp from '~/components/LayoutElements/Header'
   import FooterComp from '~/components/LayoutElements/Footer'
+  import highlightedUnit from '~/components/Multimedia/highlightedUnit';
 
   export  default {
      name: 'Topview',
      layout: 'main-layout',
      components: {
+      highlightedUnit,
       RightBar,
       HeaderComp,
       FooterComp
@@ -83,6 +90,21 @@
   .row{
     height: 100%;
   }
+  .build-container {
+    height: 99.9vh;
+  }
+  .back-container {
+    position: relative;
+    & > img {
+      position: absolute;
+      object-fit: cover;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 99.9vh;
+    }
+  }
+
   .edificio-bg {
     height: 99.9vh;
     width: 100%;
