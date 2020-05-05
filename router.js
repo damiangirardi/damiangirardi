@@ -5,6 +5,7 @@ import Router from 'vue-router'
 import Home from '~/pages/index'
 import Masterplan from '~/pages/Masterplan/index'
 import Topview from '~/pages/Topview/index'
+import ProjectDetails from '~/pages/ProjectDetails/index'
 
 
 Vue.use(Router)
@@ -27,6 +28,11 @@ export function	createRouter() {
 				path: '/topview',
 				name: 'topview',
 				component: Topview
+			},
+			{
+				path: '/project-details/:permalink',
+				name: 'projectdetails',
+				component: ProjectDetails
 			}
 		]
 	})

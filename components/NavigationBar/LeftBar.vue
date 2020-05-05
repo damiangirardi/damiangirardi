@@ -2,15 +2,60 @@
   <div>
     <nav>
       <ul>
-        <li v-b-tooltip.hover.right title="Plano"><img src="~/assets/images/icons/ICONOS_MenuIzquierda_PLANTA.png" alt="planta"></li>
-        <li v-b-tooltip.hover.right title="Vista"><img src="~/assets/images/icons/ICONOS_MenuIzquierda_VISTA 3D.png" alt="vista 3d"></li>
-        <li v-b-tooltip.hover.right title="Dimensiones"><img src="~/assets/images/icons/ICONOS_MenuIzquierda_DIMENSIONES.png" alt="dimensiones"></li>
-        <li v-b-tooltip.hover.right title="Imágenes"><img src="~/assets/images/icons/ICONOS_MenuIzquierda_IMAGENES.png" alt="imagenes"></li>
-        <li v-b-tooltip.hover.right title="Vistas"><img src="~/assets/images/icons/ICONOS_MenuIzquierda_VISTAS.png" alt="vistas"></li>
-        <li v-b-tooltip.hover.right title="Acabados"><img src="~/assets/images/icons/ICONOS_MenuIzquierda_ACABADOS.png" alt="acabados"></li>
-        <li v-b-tooltip.hover.right title="Vídeos"><img src="~/assets/images/icons/ICONOS_MenuIzquierda_VIDEO.png" alt="videos"></li>
-        <li v-b-tooltip.hover.right title="Brochure"><img src="~/assets/images/icons/ICONOS_MenuIzquierda_BROCHURE.png" alt="pdf"></li>
-        <li v-b-tooltip.hover.right title="VR 360º"><img src="~/assets/images/icons/ICONOS_MenuIzquierda_VR360.png" alt="vr360"></li>
+        <li v-if="options.planta" 
+          v-b-tooltip.hover.right title="Planta">
+          
+          <img src="~/assets/images/icons/ICONOS_MenuIzquierda_PLANTA.png" alt="planta">
+        
+        </li>
+        <li v-if="options.vista3d" 
+          v-b-tooltip.hover.right title="Vista">
+          
+          <img src="~/assets/images/icons/ICONOS_MenuIzquierda_VISTA 3D.png" alt="vista 3d">
+        
+        </li>
+        <li v-if="options.dimensiones" 
+          v-b-tooltip.hover.right title="Dimensiones">
+          
+          <img src="~/assets/images/icons/ICONOS_MenuIzquierda_DIMENSIONES.png" alt="dimensiones">
+        
+        </li>
+        <li v-if="options.imagenes" 
+          v-b-tooltip.hover.right title="Imágenes">
+          
+          <img src="~/assets/images/icons/ICONOS_MenuIzquierda_IMAGENES.png" alt="imagenes">
+        
+        </li>
+        <li v-if="options.vistas" 
+          v-b-tooltip.hover.right title="Vistas">
+          
+          <img src="~/assets/images/icons/ICONOS_MenuIzquierda_VISTAS.png" alt="vistas">
+        
+        </li>
+        <li v-if="options.acabados" 
+          v-b-tooltip.hover.right title="Acabados">
+          
+          <img src="~/assets/images/icons/ICONOS_MenuIzquierda_ACABADOS.png" alt="acabados">
+        
+        </li>
+        <li v-if="options.videos" 
+          v-b-tooltip.hover.right title="Vídeos">
+          
+          <img src="~/assets/images/icons/ICONOS_MenuIzquierda_VIDEO.png" alt="videos">
+        
+        </li>
+        <li v-if="options.brochure" 
+          v-b-tooltip.hover.right title="Brochure">
+          
+          <img src="~/assets/images/icons/ICONOS_MenuIzquierda_BROCHURE.png" alt="pdf">
+        
+        </li>
+        <li v-if="options.vr360" 
+          v-b-tooltip.hover.right title="VR 360º">
+          
+          <img src="~/assets/images/icons/ICONOS_MenuIzquierda_VR360.png" alt="vr360">
+        
+        </li>
       </ul>
     </nav>
   </div>
@@ -19,10 +64,11 @@
 <script>
   export  default {
      name: 'LeftBar',
-
+     props:{
+      options: Object
+     },
      data() {
       return {
-        message: 'hello world'
       }
      },
      methods: {
@@ -61,9 +107,9 @@
           }
         }
         img{
-          height: 17px;
+          height: 21px;
           object-fit: cover;
-          opacity: .6;
+          opacity: .8;
         }
       }
     }
