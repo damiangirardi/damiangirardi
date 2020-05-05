@@ -10,10 +10,10 @@
 				<div class="col-md-6 col-12 data-footer">
 					<div class="row no-gutters">
 						<div class="col-8">
-
-							<div class="apto">
-								<!-- project view -->
-								<div class="apto-box" v-if="$route.name == 'projectdetails'">
+							
+							<!-- PROJECT DETAILS -->
+							<div class="apto" v-if="$route.name == 'projectdetails'">
+								<div class="apto-box">
 									<div class="more">
 										<svg viewBox="0 0 426.66667 426.66667" xmlns="http://www.w3.org/2000/svg"><path fill="#7b7b7b" d="m405.332031 192h-170.664062v-170.667969c0-11.773437-9.558594-21.332031-21.335938-21.332031-11.773437 0-21.332031 9.558594-21.332031 21.332031v170.667969h-170.667969c-11.773437 0-21.332031 9.558594-21.332031 21.332031 0 11.777344 9.558594 21.335938 21.332031 21.335938h170.667969v170.664062c0 11.777344 9.558594 21.335938 21.332031 21.335938 11.777344 0 21.335938-9.558594 21.335938-21.335938v-170.664062h170.664062c11.777344 0 21.335938-9.558594 21.335938-21.335938 0-11.773437-9.558594-21.332031-21.335938-21.332031zm0 0"/></svg>
 									</div>
@@ -60,8 +60,9 @@
 										</div>
 									</div>
 								</div>
+							</div>
+
 							<!-- MASTERPLAN -->
-              
 							<div class="apto" v-if="$route.name == 'masterplan'">
 								<div class="apto-box" v-if="showButtons">
 									<template v-if="!toggleBirdAction">
@@ -78,53 +79,8 @@
 								<div v-if="showButtons" class="apto-box" v-for="(button, i) in buttonFooter" :key="i">
 									<a href="#!" @click.prevent="clickButton(button)">{{button.name}}</a>
 								</div>
-
-								<!-- <span class="divisor"></span>
-								<div class="apto-box">
-									<a href="#!" v-b-tooltip.hover.top title="+ Información">APTO. 3A</a>
-									<div class="apto-info" v-show="isAptoInfo">
-										<div class="bot">
-											<ul>
-												<li>
-													<img src="~assets/images/icons/fullscreen.svg" alt="m2">
-													<p>90.85 m2</p>
-												</li>
-												<li>
-													<img src="~assets/images/icons/bed.svg" alt="recamara">
-													<p>1 Recamara</p>
-												</li>
-												<li>
-													<img src="~assets/images/icons/estudio.svg" alt="estudio">
-													<p>Estudio</p>
-												</li>
-												<li>
-													<img src="~assets/images/icons/toilet.svg" alt="toilet">
-													<p>2.5 Baños</p>
-												</li>
-												<li>
-													<img src="~assets/images/icons/balcon.svg" alt="balcon">
-													<p>Balcón</p>
-												</li>
-												<li>
-													<img src="~assets/images/icons/vestidores.svg" alt="vestidor">
-													<p>Vestidor</p>
-												</li>
-												<li>
-													<img src="~assets/images/icons/washing-machine.svg" alt="lavanderia">
-													<p>Lavandería</p>
-												</li>
-												<li>
-													<img src="~assets/images/icons/sports-car.svg" alt="parking">
-													<p>1 Parking</p>
-												</li>
-											</ul>
-											<div class="subtitle">
-												<h4>Caracteristícas</h4>
-											</div>
-										</div>
-									</div>
-								</div> -->
 							</div>
+							
 						</div>
 						<div class="col-2 offset-2">
 							<div class="back">
