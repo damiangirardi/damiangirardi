@@ -3,8 +3,8 @@
     <nav>
       <div class="arrow center-nav"></div>
       <ul ref="scrollContainer">
-        <li v-for="(apto, i) in aptos" :key="i" :class="[{sold: apto.sold, select: apto.image === bgImage.path}]" 
-        @click="toggleImageDepto(apto.image)">
+        <li v-for="(apto, i) in aptos" :key="i" :class="[{sold: apto.sold, select: apto.image === imgSelected}]" 
+        @click="toggleImageDepto(apto)">
           <div class="link center-nav">
             {{apto.number}}
           </div>
@@ -12,7 +12,7 @@
            <div class="square"></div>
            <div class="triangle"></div>
          </div>
-        </li>    
+        </li>
       </ul>
       <div class="arrow center-nav bot"></div>
     </nav>
@@ -27,20 +27,20 @@
      props:{
       aptos: Array,
       required: true,
-      selected: String,
-      default: () => {}
+      selected: String
      },
      data() {
       return {
-        bgImage: {
-          path: this.selected
-        }
+        imgSelected: null
       }
      },
+     created() {
+      this.imgSelected = this.aptos[0].image
+     },
      methods: {
-      toggleImageDepto(img){
-        this.bgImage.path = img
-        this.$emit('bgImagenDepto', this.bgImage.path)
+      toggleImageDepto(path){
+        this.imgSelected = path.image
+        this.$emit('bgImagenToggle', path)
       }
      }
   }
@@ -52,7 +52,7 @@
     height: 100vh;
     position: relative;
     float: right;
-    z-index: 1;
+    z-index: 10;
     display: flex;
   .wrap-columnright {
     width: 65px;
@@ -81,8 +81,8 @@
       height: 90%;
       width: 100%;
       overflow-y: scroll;
-      &::-webkit-scrollbar { 
-          display: none; 
+      &::-webkit-scrollbar {
+          display: none;
       }
       li{
         color: #0c0c0c;
