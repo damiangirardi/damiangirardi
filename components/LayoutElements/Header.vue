@@ -203,7 +203,7 @@
 <style lang="scss" scoped>
 	header{
 		background-color: #fff;
-		padding: 15px 0;
+		padding: 5px 0;
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -364,7 +364,7 @@
 				overflow-y: scroll;
 			}
 			background-color: #212121;
-			top: 15px;
+			top: 5px;
 			width: 100%;
 			height: 100vh;
 			position: absolute;
