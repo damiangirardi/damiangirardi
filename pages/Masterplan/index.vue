@@ -48,8 +48,8 @@
         :proyectName="proyectName"
         :showButtons="isBirdView"
         :toggleBirdAction="birdView"
-        :buttonFooter="getButtonFooter()"
-        @clickButton="runBirdView($event)" />
+        @goBirdView="goTop()"
+        @outBirdView="goBot()"/>
       </div>
     </transition-group>
 
@@ -195,13 +195,6 @@ export  default {
         return this.guide[this.indice].birdView.image    
       }
     },
-    getButtonFooter () {
-      return [{
-        status: this.birdView,
-        action: this.birdView ? 'before' : 'after',
-        text: this.birdView ? this.proyectName + ' Abajo' : this.proyectName + ' Arriba'
-      }]
-    },
     goNext() {
       this.searchVideo('after')
       setTimeout(() => {
@@ -222,10 +215,17 @@ export  default {
         }
       }, 800)
     },
-    runBirdView (objBirdView) {
-      this.searchVideo(objBirdView.action, true)
+    goTop() {
+      this.searchVideo('after', true)
       setTimeout(() => {
-        this.birdView = objBirdView.action === 'after'
+        this.birdView = true
+      }, 800)
+            
+    },
+     goBot() {
+      this.searchVideo('before', true)
+      setTimeout(() => {
+        this.birdView = false
       }, 800)
     },
     searchVideo(type, birdView = false) {

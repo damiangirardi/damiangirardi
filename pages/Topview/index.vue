@@ -3,34 +3,33 @@
     <div id="header">
       <HeaderComp />
     </div>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12 px-0">
-          <LeftBar></LeftBar>
-          <RightBar
-          :aptos="floor"
-          :selected="imageSelected"
-          @bgImagenDepto="changeImage($event)"
-          />
-            <div class="backImage edificio-bg" :style="{ backgroundImage: 'url(' + require('@/assets/images/edificios/' + imageSelected + '.jpg') + ')' }">
-            </div>
-        </div>
-      </div>
+  
+    <!-- floors select -->
+    <RightBar
+    :aptos="topview"
+    :selected="imageSelected"
+    @bgImagenToggle="changeImage($event)"
+    />
+  
+    <!-- background image -->
+    <div class="backImage edificio-bg" :style="{ backgroundImage: 'url(' + require('@/assets/images/edificios/' + imageSelected ) + ')' }">
     </div>
+
+
     <div id="fooder" v-if="showFooter" key="footer">
       <FooterComp
-      :showButtons="true"
+      :showButtons="isHighlighted"
       :buttonFooter="buttonsList"
       @clickButton="updateBackground($event)"
       :proyectName="proyectName" />
     </div>
+
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex'
   import RightBar from '~/components/NavigationBar/RightBar'
-  import LeftBar from '~/components/NavigationBar/LeftBar'
   import HeaderComp from '~/components/LayoutElements/Header'
   import FooterComp from '~/components/LayoutElements/Footer'
 
@@ -39,7 +38,6 @@
      layout: 'main-layout',
      components: {
       RightBar,
-      LeftBar,
       HeaderComp,
       FooterComp
      },
@@ -50,30 +48,33 @@
         buttonsList: null,
         imageSelected: '',
         showFooter: true,
-        proyectName: 'THE VILLAGE'
+        proyectName: 'THE VILLAGE',
+        highlighted: false
       }
      },
       computed: {
-      ...mapGetters({
-        floor: 'Topview/images',
-      })
+        ...mapGetters({
+          topview: 'Topview/images',
+        }),
+        isHighlighted(){
+          return typeof this.florSelected.highlighted !== 'undefined'
+        }
       },
      created() {
         this.$store.dispatch('Topview/getImages')
-        this.florSelected = this.floor[0]
-        this.buttonsList = this.floor[0].apto
-        this.imageSelected = this.floor[0].image
+        this.florSelected = this.topview[0].number
+        this.imageSelected = this.topview[0].image
      },
      methods: {
        changeImage (event) {
-         this.florSelected = event;
+         this.florSelected = event
          this.imageSelected = event.image
-         this.buttonsList = event.apto
+         this.buttonsList = event.highlighted
        },
       updateBackground (event) {
         this.imageSelected = event.image
       }
-     },
+    }
   }
 </script>
 

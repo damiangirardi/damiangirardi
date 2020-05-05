@@ -3,7 +3,7 @@
     <nav>
       <div class="arrow center-nav"></div>
       <ul ref="scrollContainer">
-        <li v-for="(apto, i) in aptos" :key="i" :class="[{sold: apto.sold, select: apto.image === bgImage.path}]" 
+        <li v-for="(apto, i) in aptos" :key="i" :class="[{sold: apto.sold, select: apto.image === imgSelected}]" 
         @click="toggleImageDepto(apto)">
           <div class="link center-nav">
             {{apto.number}}
@@ -32,15 +32,16 @@
      },
      data() {
       return {
-        bgImage: {
-          path: this.selected
-        }
+        imgSelected: null
       }
+     },
+     created() {
+      this.imgSelected = this.aptos[0].image
      },
      methods: {
       toggleImageDepto(path){
-        this.bgImage.path = path.image
-        this.$emit('bgImagenDepto', path)
+        this.imgSelected = path.image
+        this.$emit('bgImagenToggle', path)
       }
      }
   }
