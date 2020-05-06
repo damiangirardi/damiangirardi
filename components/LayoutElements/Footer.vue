@@ -5,7 +5,7 @@
 				<div class="col-md-6 col-12 breadcrumb-footer">
 					<a href="#!" class="text-uppercase">PROYECTO</a>
 					<a href="#!" class="text-uppercase" v-if="typeof proyectName !== 'indefined'">{{proyectName}}</a>
-          <a href="#!" > 
+          <a href="#!" v-if="floorLoaded.number" > 
             {{ floorLoaded.number }}
           </a>
           <a href="#!" v-if="$route.name == 'projectdetails'" > 
