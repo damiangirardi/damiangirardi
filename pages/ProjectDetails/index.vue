@@ -47,7 +47,6 @@
       })
       },
      created() {
-        console.log(this.$route);
         this.$store.dispatch('Options/getImages')
         this.imgSelected = this.options.planta ? this.options.planta : this.options.dimensiones
      },
