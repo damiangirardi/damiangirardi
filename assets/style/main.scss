@@ -34,3 +34,11 @@ $orange-default: #f36f21;
 		}
 	}
 }
+
+.bs-tooltip-left{
+	.arrow{
+		&:before{
+			border-left-color: $orange-default;
+		}
+	}
+}

@@ -16,7 +16,27 @@
 				<div class="col-md-6 col-12 data-footer">
 					<div class="row no-gutters">
 						<div class="col-8">
-							
+
+							<!-- MASTERPLAN -->
+							<div class="apto" v-if="$route.name == 'masterplan'">
+								<div class="apto-box" v-if="showButtons">
+									<template v-if="!toggleBirdAction">
+										<a href="#!" @click.prevent="goBirdView()" class="text-capitalize" v-if="typeof proyectName !== 'indefined'">{{proyectName}}</a>
+									</template>
+									<template v-else>
+										<router-link v-b-tooltip.hover.top title="Visitar" class="text-capitalize selected" :to="{name: 'topview'}">{{proyectName}}</router-link>
+										<!-- <a href="#!" @click.prevent="outBirdView()">{{proyectName}} abajo</a> -->
+									</template>
+								</div>
+							</div>
+
+							<!-- TOPVIEW -->
+							<div class="apto" v-if="$route.name == 'topview'">
+								<div v-if="showButtons" class="apto-box" v-for="(button, i) in buttonFooter" :key="i">
+									<a href="#!" @click.prevent="clickButton(button)">{{button.name}}</a>
+								</div>
+							</div>
+
 							<!-- PROJECT DETAILS -->
 							<div class="apto" v-if="$route.name == 'projectdetails'">
 								<div class="apto-box">
@@ -65,27 +85,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
-
-							<!-- MASTERPLAN -->
-							<div class="apto" v-if="$route.name == 'masterplan'">
-								<div class="apto-box" v-if="showButtons">
-									<template v-if="!toggleBirdAction">
-										<a href="#!" @click.prevent="goBirdView()">{{proyectName}} arriba</a>
-									</template>
-									<template v-else>
-										<a href="#!" @click.prevent="outBirdView()">{{proyectName}} abajo</a>
-									</template>
-								</div>
-							</div>
-
-							<!-- TOPVIEW -->
-							<div class="apto" v-if="$route.name == 'topview' && showButtons">
-								<div class="apto-box" v-for="(button, i) in buttonFooter" :key="i">
-									<a href="#!" @click.prevent="clickButton(button)">{{button.name}}</a>
-								</div>
-							</div>
-							
+							</div>							
 						</div>
 						<div class="col-2 offset-2">
 							<div class="back">
@@ -175,11 +175,12 @@ import { mapGetters } from 'vuex'
 			align-items: center;
 			justify-content: flex-start;
 			height: 44px;
+			font-weight: bold;
 			a{	
 				padding: 0 30px;
 				background-color: $orange-default;
 				color: #fff;
-				font-size: 16px;
+				font-size: 18px;
 				position: relative;
 				height: 100%;
 				line-height: 44px;
@@ -262,8 +263,7 @@ import { mapGetters } from 'vuex'
 					}
 					a{
 						color: #7b7b7b;
-						font-weight: 600;
-						font-style: italic;
+						font-weight: bold;
 						font-size: 18px;
 						text-align: center;
 						display: block;
@@ -271,7 +271,7 @@ import { mapGetters } from 'vuex'
 						&:before{
 							content: '';
 							width: 0;
-							height: 2.5px;
+							height: 4px;
 							position: absolute;
 							bottom: -8px;
 							left: 50%;
@@ -279,7 +279,8 @@ import { mapGetters } from 'vuex'
 							background-color: $orange-default;
 							transition: width .2s ease; 
 						}
-						&:hover{
+						&:hover,
+						&.selected{
 							text-decoration: none;
 							&:before{
 								width: 40%;

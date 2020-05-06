@@ -64,12 +64,11 @@
     background-color: #cccccc;
   }
   nav{
-    position: relative;
+    position: absolute;
+    top: 47%;
+    transform: translateY(-50%);
     flex-direction: column;
     z-index: 3;
-    margin-bottom: auto;
-    margin-top: auto;
-    margin: auto;
     align-items: center;
     height: 77%;
     width: 100%;
@@ -94,7 +93,20 @@
         text-align: center;
         transition: background-color .1s ease;
         &.sold{
-          color: black;
+          &:before{
+            content: '';
+            width: 5px;
+            height: 5px;
+            background-color: $orange-default;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 40px;
+            transform: translateY(-50%);
+          }
+          .link{  
+            color: $orange-default;
+          }
         }
         .link {
           width: 69px;
@@ -104,6 +116,11 @@
           z-index: 3;
         }
         &.select{
+          &.sold{
+            .link{
+              color: #0c0c0c;
+            }
+          }
           .background {
             z-index: 2;
             position: absolute;

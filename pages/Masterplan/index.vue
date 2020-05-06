@@ -25,10 +25,6 @@
       <div>
         <button @click.prevent="goNext()" class="btn btn-next"><img src="~assets/images/icons/prev.svg"></button>
       </div>
-
-      <!-- <button @click.prevent="goTop()" class="btn btn-back" v-if="typeof guide[indice].birdView !== 'undefined'">Ir arriba</button> -->
-
-     <!--  <button @click="goBot()" class="btn btn-back" v-if="birdView">Ir abajo</button> -->
     </div>
     <!-- SPIN END -->
 
@@ -43,7 +39,7 @@
 
     <!-- CREAR LA CLASE PARA TRANSITION -->
     <transition-group key="initialFooter" name="fade">
-      <div id="fooder" v-if="showFooter" key="footer">
+      <div id="fooder" v-if="showFooter && isBirdView" key="footer">
         <FooterComp 
         :proyectName="proyectName"
         :showButtons="isBirdView"
@@ -83,7 +79,7 @@ export  default {
       animateSpin: false,
       videosBlob: [],
       birdView: false,
-      proyectName: 'GREEN PARK'
+      proyectName: 'Millenials'
     }
   },
 
