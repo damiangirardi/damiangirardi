@@ -7,6 +7,9 @@ export default {
     storeSpin(state, guide) {
         state.guide = guide
     },
+    storeDetails(state, details) {
+        state.details = details
+    },
     storeBlob(state, blob) {
         if (state.initialStep.video === blob.path) {
             state.initialStep.blob = blob.url

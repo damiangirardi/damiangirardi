@@ -1,5 +1,6 @@
 import {initialStep} from '@/proyecto/videos'
 import {guide} from '@/proyecto/videos'
+import {details} from '@/proyecto/details'
 
 export default {
     startApp({commit}) {
@@ -24,6 +25,10 @@ export default {
         }).catch((error) => {
           console.log(error);
         })
+    },
+    getDetailsApto ({commit}) {
+         commit('storeDetails', details)
+         return details;
     },
     getSpinVideos({commit}, video) {
         return this.$axios({
