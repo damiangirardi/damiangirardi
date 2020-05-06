@@ -3,17 +3,17 @@
     <div id="header">
       <HeaderComp />
     </div>
-
     <LeftBar
       :options="options"
       @bgImagenDepto="changeImage($event)"
     ></LeftBar>
-
-    <div class="backImage edificio-bg" :style="{ backgroundImage: 'url(' + require('@/assets/images/opciones/' + imgSelected ) + ')' }"></div>
-
+    <div class="backImage edificio-bg" 
+      :style="{ backgroundImage: 'url(' + require('@/assets/images/opciones/' + imgSelected ) + ')' }">
+    </div>
     <div id="fooder" v-if="showFooter" key="footer">
       <FooterComp
       :option="options"
+      :showButtons="true"
       :proyectName="proyectName" />
     </div>
   </div>
@@ -72,6 +72,8 @@
   .backImage {
     position: absolute;
     background-size: cover;
+    background-position: 0px;
+    background-repeat: no-repeat;
     top: 0px;
     left: 0px;
     z-index: 0;

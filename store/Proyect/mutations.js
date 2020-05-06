@@ -16,5 +16,8 @@ export default {
             })
             element.blob = blob.url
         }
+    },
+    storeFloor (state, objValue){
+        state.floor = objValue
     }
 }
