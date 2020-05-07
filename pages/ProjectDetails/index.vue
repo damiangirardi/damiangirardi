@@ -1,22 +1,25 @@
 <template>
-  <div>
+  <div v-if="!loading">
     <div id="header">
       <HeaderComp />
     </div>
 
     <LeftBar
-      :options="options[0]"
-      @bgImagenDepto="changeImage($event)"
+      :options="selectedOption"
+      @toggleOption="toggleOption($event)"
     ></LeftBar>
 
-    <div class="backImage edificio-bg" 
-      :style="{ backgroundImage: 'url(' + require('@/assets/images/opciones/' + imgSelected ) + ')' }">
-    </div>
+    <template v-if="isSlider">
+      <SliderImages
+        :sliderImg="selectedOption[optionName]"
+      ></SliderImages>
+    </template>
 
-    <SliderImages
-      :sliderImg="options[0].galeria"
-      :sliderName="'gerlia'"
-    ></SliderImages>
+    <template v-else>
+      <div class="backImage edificio-bg" 
+        :style="{ backgroundImage: 'url(' + require('@/assets/images/options/' + selectedOption[optionName] ) + ')' }">
+      </div>
+    </template>
 
     <div id="fooder" v-if="showFooter" key="footer">
       <FooterComp
@@ -46,23 +49,37 @@
      data() {
       return {
         showHeader: true,
-        imgSelected: '',
         showFooter: true,
-        proyectName: 'THE VILLAGE'
+        proyectName: 'THE VILLAGE',
+        isSlider: false,
+        optionName: 'planta',
+        loading: true
       }
      },
       computed: {
-      ...mapGetters({
-        options: 'Options/images',
-      })
+        ...mapGetters({
+          options: 'Options/images',
+        }),
+        selectedOption() {
+          if(this.options.length){
+           return this.options[0]
+          }else{
+            return null
+          }
+        }
       },
      created() {
+        this.loading = true
         this.$store.dispatch('Options/getImages')
-        this.imgSelected = this.options[0].planta ? this.options[0].planta : this.options[0].dimensiones
+          .then(() => {
+            this.loading = false
+          })
+
      },
      methods: {
-       changeImage ($event) {
-         this.imgSelected = $event;
+       toggleOption (e) {
+        this.isSlider = e.sliderOn
+        this.optionName = e.selectOption
        }
      },
      mounted() {
