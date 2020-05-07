@@ -30,6 +30,7 @@ docker-compose-build:
 	set -e
 	source $(VIRTUALENV_DIR)/bin/activate
 	docker-compose --env-file /dev/null \
+		-p graff3d-web3d-frontend \
 		-f docker-compose.yml \
 		build \
 		$(BUILD_ARGS) \
@@ -40,14 +41,24 @@ docker-compose-up:
 	set -e
 	source $(VIRTUALENV_DIR)/bin/activate
 	docker-compose --env-file /dev/null \
+		-p graff3d-web3d-frontend \
 		-f docker-compose.yml \
 		up \
 		$(UP_ARGS)
 
+docker-compose-run:
+	set -e
+	source $(VIRTUALENV_DIR)/bin/activate
+	docker-compose --env-file /dev/null \
+		-p graff3d-web3d-frontend \
+		-f docker-compose.yml \
+		run \
+		nuxt \
+		$(RUN_ARGS)
+
 docker-compose-clean:
 	set -e
 	source $(VIRTUALENV_DIR)/bin/activate
-	docker-compose -f docker-compose.yml kill
-	docker-compose -f docker-compose.yml rm --force
-	docker volume ls | grep -q web3d_dot_nuxt && docker volume rm web3d_node_modules || true
-	docker volume ls | grep -q web3d_dot_nuxt && docker volume rm web3d_nuxt || true
+	docker-compose -p graff3d-web3d-frontend -f docker-compose.yml kill
+	docker-compose -p graff3d-web3d-frontend -f docker-compose.yml rm --force
+	git clean --dry-run -d -X ./.docker-compose-volumes

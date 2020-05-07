@@ -5,23 +5,25 @@ FROM node:12.16.3-alpine3.11 as build
 ARG USER_UID
 ARG USER_GID
 
+RUN apk --no-cache add shadow && \
+    usermod -u ${USER_UID} node && \
+    groupmod -g ${USER_GID} node
+
+RUN mkdir /app && chown node.node /app
+RUN mkdir -p /nuxt/.nuxt && chown -R node.node /nuxt
+RUN mkdir /node_modules && chown node.node /node_modules
+RUN ln -vs /node_modules /app/node_modules
+
 WORKDIR /app
+
+USER node
 
 COPY package.json package-lock.json /app/
 
 RUN npm install
 
-RUN apk --no-cache add shadow && \
-    usermod -u ${USER_UID} node && \
-    groupmod -g ${USER_GID} node
-
-RUN mv -v /app/node_modules /
-RUN mkdir /app/node_modules
-RUN chown ${USER_UID}.${USER_GID} /app/node_modules
 VOLUME /app/node_modules
-
-RUN mkdir /nuxt
-RUN chown -R ${USER_UID}.${USER_GID} /nuxt
+VOLUME /nuxt
 
 ENV NODE_PATH=/node_modules
 ENV PATH=$PATH:/node_modules/.bin
