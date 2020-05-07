@@ -7,7 +7,7 @@
           <a
             href="#!"
             class="text-uppercase"
-            v-if="typeof proyectName !== 'indefined'"
+            v-if="typeof proyectName !== 'undefined'"
           >{{proyectName}}</a>
           <a href="#!" v-if="floorLoaded.number">
             {{ floorLoaded.number }}
@@ -27,7 +27,7 @@
                       href="#!"
                       @click.prevent="goBirdView()"
                       class="text-capitalize"
-                      v-if="typeof proyectName !== 'indefined'"
+                      v-if="typeof proyectName !== 'undefined'"
                     >{{proyectName}}</a>
                   </template>
                   <template v-else>
