@@ -4,7 +4,7 @@
       <button @click.prevent="prev()" class="btn btn-back"><img src="~assets/images/icons/prev.svg"></button>
       
         <transition-group name="slide-left-short" mode="in-out" key="carousel">
-          <img :src="require(`@/assets/images/opciones/${images}`)" alt="" class="img-slide" :key="`carousel-`+imgIndex">
+          <img :src="require(`@/assets/images/options/${images}`)" alt="" class="img-slide" :key="`carousel-`+imgIndex">
         </transition-group>
 
       <button @click.prevent="next()" class="btn btn-next"><img src="~assets/images/icons/prev.svg"></button>
