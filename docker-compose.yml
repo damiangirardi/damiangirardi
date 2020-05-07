@@ -9,13 +9,13 @@ services:
       - type: bind
         source: ./
         target: /app
-      - type: volume
-        source: node_modules
+      - type: bind
+        source: ./.docker-compose-volumes/node_modules
         target: /app/node_modules
         volume:
           nocopy: true
-      - type: volume
-        source: nuxt
+      - type: bind
+        source: ./.docker-compose-volumes/nuxt
         target: /nuxt
         volume:
           nocopy: true
@@ -23,7 +23,3 @@ services:
       - "3000:3000"
     environment:
       HOST: 0.0.0.0
-
-volumes:
-  node_modules:
-  nuxt:
