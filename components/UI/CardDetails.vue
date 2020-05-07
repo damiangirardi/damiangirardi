@@ -9,19 +9,25 @@
           />
         </svg>
       </div>
-      <div class="apto-info" v-if="menuVisible">
-        <div class="bot">
-          <ul>
-            <li v-for=" (item, i) in details" :key="i">
-              <img :src="require('assets/images/icons/'+item.img)"  :alt="item.alt" />
-              <p>{{item.text}}</p>
-            </li>
-          </ul>
-          <div class="subtitle">
-            <h4>Caracteristícas</h4>
+      <transition name="fade">
+        <div class="apto-info" v-if="menuVisible">
+          <div class="wrap-plane">
+            <img width="100%" :src="require('@/assets/images/opciones/'+listDetails.imgBackground)" alt="">
+          </div>
+          <div class="bot">
+            <div class="title">
+              <span>Unidad</span>
+              <h1 >3B</h1>
+            </div>
+            <ul>
+              <li v-for=" (item, i) in listDetails.details" :key="i">
+                <img :src="require('assets/images/icons/'+item.img)"  :alt="item.alt" />
+                <p>{{item.text}}</p>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -37,7 +43,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      details: 'Proyect/details',
+      listDetails: 'Proyect/details',
     })
   },
   created () {
@@ -95,9 +101,26 @@ export default {
       background-color: #fff;
       width: 100%;
       .bot {
+        display: flex;
+        .title {
+          margin-left: auto;
+          margin-right: auto;
+          text-align: left;
+          margin-top: 20px;
+          span {
+            font-size: 13px;
+          }
+          h1 {
+            font-size: 50px;
+            margin-top: 0px;
+            font-weight: bold;
+            color: $orange-default;
+          }
+        }
         ul {
-          padding: 0;
-          margin: 10px 10px 10px 25px;
+          border-left: 1px solid #d0d0d0;
+          margin-bottom: 0px;
+          padding: 10px;
           li {
             list-style: none;
             display: flex;
@@ -106,7 +129,6 @@ export default {
             p {
               margin: 0;
               font-size: 14px;
-              color: #666;
             }
             img {
               height: 20px;
@@ -148,5 +170,13 @@ export default {
       }
     }
   }
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: all .3s ease-in-out;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
