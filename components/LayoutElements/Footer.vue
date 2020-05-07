@@ -9,9 +9,12 @@
             class="text-uppercase"
             v-if="typeof proyectName !== 'indefined'"
           >{{proyectName}}</a>
-          <a href="#!" v-if="floorLoaded.number">{{ floorLoaded.number }}</a>
-          <a href="#!" v-if="$route.name == 'projectdetails'">{{ $route.params.permalink }}</a>
-          <!-- <a href="#!" class="text-uppercase" v-if="showButtons">{{proyectName}}</a> -->
+          <a href="#!" v-if="floorLoaded.number">
+            {{ floorLoaded.number }}
+          </a>
+          <a href="#!" v-if="$route.name == 'projectdetails'">
+            {{ $route.params.permalink }}
+          </a>
         </div>
         <div class="col-md-6 col-12 data-footer">
           <div class="row no-gutters">
@@ -91,11 +94,11 @@ import CardDetails from  '~/components/UI/CardDetails'
 import { mapGetters } from 'vuex'
 	export default {
 		props:{
-				proyectName: String,
-				buttonFooter: {
-					type: Array,
-					default: () => {}
-				},
+      proyectName: String,
+      buttonFooter: {
+        type: Array,
+        default: () => {}
+      },
 			showButtons: {
 				type: Boolean,
 				default: false
@@ -120,7 +123,7 @@ import { mapGetters } from 'vuex'
     },
     watch: {
       $route(to, from) {
-      if (this.isAptoInfo) {
+        if (this.isAptoInfo) {
           this.toggleAptoinfo()
         }
       }
