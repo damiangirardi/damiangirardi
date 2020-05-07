@@ -1,3 +1,3 @@
 export default {
-    images: state => state.images,
+    images: state => state.images
 }
