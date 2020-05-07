@@ -112,8 +112,8 @@ export  default {
 
   computed: {
     ...mapGetters({
-      initialStep: 'Proyect/initialStep',
-      guide: 'Proyect/guide'
+      initialStep: 'Project/initialStep',
+      guide: 'Project/guide'
     }),
     isBirdView(){
       return typeof this.guide[this.indice].birdView !== 'undefined'
@@ -123,7 +123,7 @@ export  default {
 
   created () {
     this.indice = 0 /// LUEGO REEMPLAZAR POR QUERY
-    this.$store.dispatch('Proyect/getSpin')
+    this.$store.dispatch('Project/getSpin')
       .then(() => {
         /// Download videos from spin
         _.forEach(this.guide, guide => {
@@ -151,7 +151,7 @@ export  default {
           } 
         })
         _.forEach(this.videosBlob, video => {
-          this.$store.dispatch('Proyect/getSpinVideos', video.path)
+          this.$store.dispatch('Project/getSpinVideos', video.path)
             .then( res => {
               video.blob = res
             })

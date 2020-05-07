@@ -23,17 +23,17 @@ export  default {
   },
   computed: {
     ...mapGetters({
-      initialStep: 'Proyect/initialStep'
+      initialStep: 'Project/initialStep'
     })
   },
   created () {
-    this.$store.dispatch('Proyect/startApp')
+    this.$store.dispatch('Project/startApp')
       .then(() => {
         this.loading = false
         let obj = {
           path: this.initialStep.video
         }
-        this.$store.dispatch('Proyect/getVideo', obj)
+        this.$store.dispatch('Project/getVideo', obj)
       })
   },
   methods: {

@@ -9,7 +9,7 @@
             class="text-uppercase"
             v-if="typeof proyectName !== 'undefined'"
           >{{proyectName}}</a>
-          <a href="#!" v-if="floorLoaded.number">
+          <a href="#!" v-if="floorLoaded.length">
             {{ floorLoaded.number }}
           </a>
           <a href="#!" v-if="$route.name == 'projectdetails'">
@@ -19,8 +19,7 @@
         <div class="col-md-6 col-12 data-footer">
           <div class="row no-gutters">
             <div class="col-8">
-              <!-- MASTERPLAN -->
-              <div class="apto" v-if="$route.name == 'masterplan'">
+              <div class="apto" v-if="$route.name === 'masterplan'">
                 <div class="apto-box" v-if="showButtons">
                   <template v-if="!toggleBirdAction">
                     <a
@@ -118,7 +117,7 @@ import { mapGetters } from 'vuex'
     },
     computed: {
       ...mapGetters({
-        floorLoaded: 'Proyect/floor',
+        floorLoaded: 'Project/floor',
       })
     },
     watch: {

@@ -70,14 +70,14 @@
         this.$store.dispatch('Topview/getImages')
         this.floorSelected = this.topview[0]
         this.imageSelected = this.topview[0].image
-        this.$store.dispatch('Proyect/setFloor', this.floorSelected)
+        this.$store.dispatch('Project/setFloor', this.floorSelected)
      },
      methods: {
        changeImage (event) {
          this.floorSelected = event
          this.imageSelected = event.image
          this.buttonsList = event.highlighted
-         this.$store.dispatch('Proyect/setFloor', event)
+         this.$store.dispatch('Project/setFloor', event)
        },
       updateBackground (event) {
         this.imageSelected = event.image
