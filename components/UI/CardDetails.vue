@@ -65,7 +65,7 @@ export default {
   height: 44px;
   .apto-box {
     position: relative;
-    width: 50%;
+    width: 60%;
     &:not(:last-child) {
       border-right: 1px solid #7b7b7b;
     }
@@ -106,7 +106,7 @@ export default {
           margin-left: auto;
           margin-right: auto;
           text-align: left;
-          margin-top: 20px;
+          margin-top: 8px;
           span {
             font-size: 13px;
           }
@@ -121,8 +121,10 @@ export default {
           border-left: 1px solid #d0d0d0;
           margin-bottom: 0px;
           padding: 10px;
+          padding-right: 30px;
           li {
             list-style: none;
+            line-height: 23px;
             display: flex;
             align-items: center;
             justify-content: flex-start;
