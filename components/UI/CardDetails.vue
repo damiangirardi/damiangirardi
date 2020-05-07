@@ -43,11 +43,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      listDetails: 'Proyect/details',
+      listDetails: 'Project/details',
     })
   },
   created () {
-    this.$store.dispatch('Proyect/getDetailsApto');
+    this.$store.dispatch('Project/getDetailsApto');
   },
   methods: {
     showMenu () {
