@@ -61,4 +61,4 @@ docker-compose-clean:
 	source $(VIRTUALENV_DIR)/bin/activate
 	docker-compose -p graff3d-web3d-frontend -f docker-compose.yml kill
 	docker-compose -p graff3d-web3d-frontend -f docker-compose.yml rm --force
-	git clean --dry-run -d -X ./.docker-compose-volumes
+	git clean -f -d -X ./.docker-compose-volumes ./dist
