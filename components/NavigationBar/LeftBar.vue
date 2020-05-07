@@ -65,7 +65,10 @@
   export  default {
      name: 'LeftBar',
      props:{
-      options: Object
+      options: {
+        type: Object,
+        default: {}
+      }
      },
      data() {
       return {

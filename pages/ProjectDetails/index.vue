@@ -3,13 +3,21 @@
     <div id="header">
       <HeaderComp />
     </div>
+
     <LeftBar
-      :options="options"
+      :options="options[0]"
       @bgImagenDepto="changeImage($event)"
     ></LeftBar>
+
     <div class="backImage edificio-bg" 
       :style="{ backgroundImage: 'url(' + require('@/assets/images/opciones/' + imgSelected ) + ')' }">
     </div>
+
+    <SliderImages
+      :sliderImg="options[0].galeria"
+      :sliderName="'gerlia'"
+    ></SliderImages>
+
     <div id="fooder" v-if="showFooter" key="footer">
       <FooterComp
       :option="options"
@@ -22,6 +30,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import LeftBar from '~/components/NavigationBar/LeftBar'
+  import SliderImages from '~/components/Multimedia/SliderImages'
   import HeaderComp from '~/components/LayoutElements/Header'
   import FooterComp from '~/components/LayoutElements/Footer'
 
@@ -30,6 +39,7 @@
      layout: 'main-layout',
      components: {
       LeftBar,
+      SliderImages,
       HeaderComp,
       FooterComp
      },
@@ -48,13 +58,15 @@
       },
      created() {
         this.$store.dispatch('Options/getImages')
-        this.imgSelected = this.options.planta ? this.options.planta : this.options.dimensiones
+        this.imgSelected = this.options[0].planta ? this.options[0].planta : this.options[0].dimensiones
      },
      methods: {
        changeImage ($event) {
          this.imgSelected = $event;
        }
      },
+     mounted() {
+     }
   }
 </script>
 

@@ -36,6 +36,8 @@ export default {
     // CSS & SCSS file in the project
     '@/assets/style/main.css',
     '@/assets/style/main.scss',
+    '@/assets/style/transitions.scss'
+
   ],
   /*
    ** Plugins to load before mounting the App
