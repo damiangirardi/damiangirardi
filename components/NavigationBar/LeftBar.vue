@@ -86,9 +86,10 @@
       }
      },
      methods: {
-      toggleOption(name, bool) {
+      // options select and slider active or not
+      toggleOption(name, isSlider) {
         this.selectOption = name
-        this.sliderOn = bool
+        this.sliderOn = isSlider
         this.$emit('toggleOption', {'selectOption': this.selectOption, 'sliderOn': this.sliderOn})
       }
      }
