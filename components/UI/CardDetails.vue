@@ -12,7 +12,7 @@
       <transition name="fade">
         <div class="apto-info" v-if="menuVisible">
           <div class="wrap-plane">
-            <img width="100%" :src="require('@/assets/images/opciones/'+listDetails.imgBackground)" alt="">
+            <img width="100%" :src="require('@/assets/images/options/'+listDetails.imgBackground)" alt="">
           </div>
           <div class="bot">
             <div class="title">
