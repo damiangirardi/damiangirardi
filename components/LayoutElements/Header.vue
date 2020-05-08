@@ -24,9 +24,12 @@
 						<div class="icon" v-b-tooltip.hover title="Contactarnos"  @click="toggleModal('contacto')">
 							<img src="~assets/images/icons/ICONOS_MenuArriba_CONTACTO.png" alt="contacto">
 						</div>
+
 						<div class="icon" v-b-tooltip.hover title="Contactanos por Whatsapp">
-							<img src="~assets/images/icons/ICONOS_MenuArriba_WHATSAPP.png" alt="whats app">
+							<!-- full phone number in international format. Omit any zeroes, brackets, or dashes when adding the phone number in international format -->
+							<a target="_blank" :href="`https://wa.me/`+whatsAppNumber+`?text=`+whatsAppText"><img src="~assets/images/icons/ICONOS_MenuArriba_WHATSAPP.png" alt="whats app"></a>
 						</div>
+
 						<div class="icon" v-b-tooltip.hover title="Agregar a mis favoritos">
 							<img src="~assets/images/icons/ICONOS_MenuArriba_FAVORITOS.png" alt="favoritos">
 						</div>
@@ -165,7 +168,9 @@
       return{
       	isMenuOpen: false,
       	isSubMenuOpen: false,
-      	showModal: ''
+      	showModal: '',
+      	whatsAppNumber: '543516000000',
+      	whatsAppText: 'Hello world'
       }
     },
     watch: {
