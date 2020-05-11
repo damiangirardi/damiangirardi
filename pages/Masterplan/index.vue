@@ -56,6 +56,7 @@
 import { mapGetters } from 'vuex'
 import HeaderComp from '~/components/LayoutElements/Header'
 import FooterComp from '~/components/LayoutElements/Footer'
+import _ from 'lodash'
 
 export  default {
   name: 'Masterplan',

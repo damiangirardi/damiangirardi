@@ -1,6 +1,6 @@
 export default {
   mode: 'universal',
-  buildDir: '/nuxt/.nuxt',
+  // buildDir: '/nuxt/.nuxt',
   /*
    ** Headers of the page
    */
@@ -24,7 +24,7 @@ export default {
 
   /// VARIABLES DE ENTORNO
   env: {
-    baseUrl: process.env.BASE_VIDEO_URL || 'http://localhost:3000/',
+    baseUrl: process.env.BASE_VIDEO_URL || 'http://localhost:5000/',
   },
 
   /*
@@ -36,8 +36,7 @@ export default {
     // CSS & SCSS file in the project
     '@/assets/style/main.css',
     '@/assets/style/main.scss',
-    '@/assets/style/transitions.scss'
-
+    '@/assets/style/transitions.scss',
   ],
   /*
    ** Plugins to load before mounting the App
@@ -68,7 +67,7 @@ export default {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: process.env.BASE_VIDEO_URL || 'http://localhost:3000/',
+    baseURL: process.env.BASE_VIDEO_URL || 'http://localhost:5000/',
   },
   /*
    ** Build configuration
@@ -89,5 +88,9 @@ export default {
         })
       }
     },
+  },
+
+  generate: {
+    routes: ['/', '/masterplan'],
   },
 }

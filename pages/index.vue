@@ -15,7 +15,6 @@
 import { mapGetters } from 'vuex';
 export  default {
   name: 'home',
-  layout: 'main-layout',
   data() {
     return {
       loading: true
